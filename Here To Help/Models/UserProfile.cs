@@ -1,5 +1,7 @@
 
 
+using System;
+
 namespace Here_To_Help.Models
 {
     public class UserProfile
@@ -9,6 +11,6 @@ namespace Here_To_Help.Models
         public string Email { get; set; }
         public string FirebaseUserId { get; set; }
         public string UserName { get; set; }
-        public string CreateDate { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }
