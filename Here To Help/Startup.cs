@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Here_To_Help.Repositories;
 
 namespace Here_To_Help
 {
@@ -27,7 +28,14 @@ namespace Here_To_Help
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
+
         {
+            services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+            services.AddTransient<ISkillRepository, SkillRepository>();
+            services.AddTransient<IUserSkillRepository, UserSkillRepository>();
+            services.AddTransient<IQuestionRepository, QuestionRepository>();
+
+
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
             services
