@@ -109,10 +109,11 @@ namespace Here_To_Help.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                          SELECT up.Id AS UserProfileId, up.Name, AS Name up.FirebaseUserId, up.UserName 
-                               up.Email, up.DateCreated
+                          SELECT UserProfile.Id AS UserProfileId, UserProfile.Name AS Name, UserProfile.FirebaseUserId, UserProfile.UserName,
+                               UserProfile.Email, UserProfile.DateCreated
+                          FROM UserProfile
                                
-                         WHERE up.Id = @Id";
+                         WHERE UserProfile.Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
 

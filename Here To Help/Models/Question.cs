@@ -1,3 +1,5 @@
+using System;
+
 namespace Here_To_Help.Models
 {
     public class Question
@@ -7,6 +9,8 @@ namespace Here_To_Help.Models
         public string Content { get; set; }
         public int UserProfileId { get; set; }
         public int SkillId { get; set; }
-        public string DateCreated { get; set; }
+        public DateTime DateCreated { get; set; }
+        public Skill Skill { get; set; }
+        public UserProfile UserProfile { get; set; }
     }
 }
