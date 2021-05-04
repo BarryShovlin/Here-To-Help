@@ -159,14 +159,12 @@ namespace Here_To_Help.Repositories
                     cmd.CommandText = @"
                         Update Question
                             Set Title = @Title,
-                                Content = @Content,
-                                SkillId = @SkillId
+                                Content = @Content
                             WHERE Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Id", que.Id);
                     DbUtils.AddParameter(cmd, "@Title", que.Title);
                     DbUtils.AddParameter(cmd, "@Content", que.Content);
-                    DbUtils.AddParameter(cmd, "@SkillId", que.SkillId);
                     cmd.ExecuteNonQuery();
                 }
             }
