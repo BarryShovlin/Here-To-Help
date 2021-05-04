@@ -1,3 +1,5 @@
+using System;
+
 namespace Here_To_Help.Models
 {
     public class Post
@@ -8,6 +10,8 @@ namespace Here_To_Help.Models
         public string Content { get; set; }
         public int UserProfileId { get; set; }
         public int SkillId { get; set; }
-        public string CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }
+        public Skill Skill { get; set; }
+        public UserProfile UserProfile { get; set; }
     }
 }
