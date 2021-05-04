@@ -34,6 +34,7 @@ namespace Here_To_Help
             services.AddTransient<ISkillRepository, SkillRepository>();
             services.AddTransient<IUserSkillRepository, UserSkillRepository>();
             services.AddTransient<IQuestionRepository, QuestionRepository>();
+            services.AddTransient<IPostRepository, PostRepository>();
 
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
