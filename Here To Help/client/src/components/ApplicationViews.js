@@ -8,6 +8,7 @@ import { UserProfileContext } from "../providers/UserProfileProvider"
 import { UserProfileList } from "../components/UserProfile/UserProfileList"
 import { UserProfileDetails } from "../components/UserProfile/UserProfileDetails"
 import { UserProfileProvider } from "../providers/UserProfileProvider"
+import { CurrentUserProfileDetails } from "../components/UserProfile/CurrentUserProfile"
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -16,7 +17,7 @@ export default function ApplicationViews() {
         <main>
             <Switch>
                 <Route path="/" exact>
-                    {isLoggedIn ? <Hello /> : <Redirect to="/login" />}
+                    {isLoggedIn ? <CurrentUserProfileDetails /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/login">
