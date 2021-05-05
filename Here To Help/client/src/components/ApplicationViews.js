@@ -5,6 +5,9 @@ import Login from "./Login";
 import Register from "./Register";
 import Hello from "../Hello"
 import { UserProfileContext } from "../providers/UserProfileProvider"
+import { UserProfileList } from "../components/UserProfile/UserProfileList"
+import { UserProfileDetails } from "../components/UserProfile/UserProfileDetails"
+import { UserProfileProvider } from "../providers/UserProfileProvider"
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -23,6 +26,14 @@ export default function ApplicationViews() {
                 <Route path="/register">
                     <Register />
                 </Route>
+                <UserProfileProvider>
+                    <Route exact path="/userProfiles">
+                        <UserProfileList />
+                    </Route>
+                    <Route exact path="/userProfiles/detail/getById/:userProfileId(\d+)">
+                        <UserProfileDetails />
+                    </Route>
+                </UserProfileProvider>
 
             </Switch>
 

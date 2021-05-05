@@ -34,6 +34,9 @@ namespace Here_To_Help
             services.AddTransient<ISkillRepository, SkillRepository>();
             services.AddTransient<IUserSkillRepository, UserSkillRepository>();
             services.AddTransient<IQuestionRepository, QuestionRepository>();
+            services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<IPostCommentRepository, PostCommentRepository>();
+
 
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
@@ -67,6 +70,13 @@ namespace Here_To_Help
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Here_To_Help v1"));
+                app.UseCors(options =>
+                {
+                    options.AllowAnyOrigin();
+                    options.AllowAnyMethod();
+                    options.AllowAnyHeader();
+                });
+
             }
 
             app.UseHttpsRedirection();

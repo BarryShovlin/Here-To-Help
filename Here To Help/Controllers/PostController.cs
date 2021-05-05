@@ -10,19 +10,19 @@ namespace Here_To_Help.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class QuestionController : ControllerBase
+    public class PostController : ControllerBase
     {
-        private readonly IQuestionRepository _questionRepository;
-        public QuestionController(IQuestionRepository questionRepository)
+        private readonly IPostRepository _postRepository;
+        public PostController(IPostRepository postRepository)
         {
-            _questionRepository = questionRepository;
+            _postRepository = postRepository;
         }
 
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_questionRepository.GetAllQuestions());
+            return Ok(_postRepository.GetAllPosts());
         }
 
 
@@ -30,7 +30,7 @@ namespace Here_To_Help.Controllers
         [HttpGet("getById/{id}")]
         public IActionResult Get(int id)
         {
-            var up = _questionRepository.GetQuestionById(id);
+            var up = _postRepository.GetPostById(id);
             if (up == null)
             {
                 return NotFound();
@@ -39,28 +39,28 @@ namespace Here_To_Help.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Question Question)
+        public IActionResult Post(Post Post)
         {
-            _questionRepository.Add(Question);
-            return CreatedAtAction("Details", new { id = Question.Id }, Question);
+            _postRepository.Add(Post);
+            return CreatedAtAction("Details", new { id = Post.Id }, Post);
         }
 
         [HttpDelete("delete/{id}")]
         public IActionResult Delete(int id)
         {
-            _questionRepository.Delete(id);
+            _postRepository.Delete(id);
             return NoContent();
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, Question que)
+        public IActionResult Put(int id, Post que)
         {
             if (id != que.Id)
             {
                 return BadRequest();
             }
 
-            _questionRepository.Update(que);
+            _postRepository.Update(que);
             return NoContent();
         }
 
