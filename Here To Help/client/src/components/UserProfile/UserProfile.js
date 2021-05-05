@@ -9,7 +9,7 @@ export const UserProfile = ({ userProfile }) => {
     return (
         <section className="userProfile">
             <h3 className="userProfileTitle">
-                <Link to={`/userProfile/getById/${userProfile.id}`}>
+                <Link to={`/userProfile/detail/getById/${userProfile.id}`}>
                     {userProfile.userName}
                 </Link>
             </h3>

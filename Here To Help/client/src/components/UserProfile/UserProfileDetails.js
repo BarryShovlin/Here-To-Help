@@ -25,7 +25,7 @@ export const UserProfileDetails = () => {
             <h3 className="userProfile__displayName">{userProfile.userName}</h3>
             <div className="userProfile__fullName">Name: {userProfile.name}</div>
             <div className="userProfile__email">Email: {userProfile.email}</div>
-            <div className="userProfile__creationDate">Profile Creation Date: {userProfile.createDateTime}</div>
+            <div className="userProfile__creationDate">Member Since: {userProfile.dateCreated}</div>
         </section>
 
     )

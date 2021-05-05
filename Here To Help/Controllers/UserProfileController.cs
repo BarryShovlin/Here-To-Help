@@ -44,7 +44,7 @@ namespace Here_To_Help.Controllers
 
 
 
-        [HttpGet("getById/{id}")]
+        [HttpGet("detail/getById/{id}")]
         public IActionResult Get(int id)
         {
             var up = _userProfileRepository.GetUserProfileById(id);
