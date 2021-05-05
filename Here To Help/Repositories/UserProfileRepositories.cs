@@ -54,7 +54,7 @@ namespace Here_To_Help.Repositories
                     cmd.CommandText = @"
                         SELECT up.Id, Up.FirebaseUserId, up.Name AS UserProfileName, up.Email, up.UserName, up.DateCreated
                           FROM UserProfile up
-                         WHERE FirebaseUserId = @FirebaseuserId";
+                         WHERE FirebaseUserId = @FirebaseUserId";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
 

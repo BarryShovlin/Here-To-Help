@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace Here_To_Help.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 
