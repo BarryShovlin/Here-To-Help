@@ -83,6 +83,8 @@ namespace Here_To_Help
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

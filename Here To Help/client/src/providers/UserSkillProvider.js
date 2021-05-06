@@ -2,14 +2,14 @@
 import React, { useContext, useState } from "react";
 import { UserProfileContext } from "./UserProfileProvider"
 
-export const SkillContext = React.createContext();
+export const UserSkillContext = React.createContext();
 
-export const SkillProvider = (props) => {
-    const [skills, setSkills] = useState([]);
+export const UserSkillProvider = (props) => {
+    const [userSkills, setUserSkills] = useState([]);
     const { getToken } = useContext(UserProfileContext);
-    const apiUrl = "/api/Skill";
+    const apiUrl = "/api/UserSkill";
 
-    const getAllSkills = () =>
+    const getAllUserSkills = () =>
         getToken().then((token) =>
             fetch(apiUrl, {
                 method: "GET",
@@ -17,20 +17,21 @@ export const SkillProvider = (props) => {
                     Authorization: `Bearer ${token}`
                 }
             }).then(resp => resp.json())
-                .then(setSkills));
+                .then(setUserSkills));
 
-    const getSkillById = (id) =>
-        getToken().then((token) =>
-            fetch(`/api/skill/${id}`, {
+    const getUserSkillsByUserId = (id) => {
+        return getToken().then((token) =>
+            fetch(`/api/userSkill/getById/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
             }).then((res) => res.json()))
+    };
 
 
 
-    const addSkill = (skill) =>
+    const addUserSkill = (skill) =>
         getToken().then((token) =>
             fetch(apiUrl, {
                 method: "POST",
@@ -47,24 +48,24 @@ export const SkillProvider = (props) => {
             }));
 
 
-    const deleteSkill = (id) =>
+    const deleteUserSkill = (id) =>
         getToken().then((token) =>
-            fetch(`/api/skill/delete/${id}`, {
+            fetch(`/api/userSkill/delete/${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
-                .then(getAllSkills()))
+                .then(getAllUserSkills()))
 
 
 
 
     return (
-        <SkillContext.Provider value={{ skills, getAllSkills, addSkill, getSkillById, deleteSkill }}>
+        <UserSkillContext.Provider value={{ userSkills, getAllUserSkills, addUserSkill, getUserSkillsByUserId, deleteUserSkill }}>
             {props.children}
-        </SkillContext.Provider>
+        </UserSkillContext.Provider>
     );
 };
-export default SkillProvider;
+export default UserSkillProvider;
 

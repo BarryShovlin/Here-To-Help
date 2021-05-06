@@ -2,14 +2,14 @@
 import React, { useContext, useState } from "react";
 import { UserProfileContext } from "./UserProfileProvider"
 
-export const SkillContext = React.createContext();
+export const QuestionContext = React.createContext();
 
-export const SkillProvider = (props) => {
-    const [skills, setSkills] = useState([]);
+export const QuestionProvider = (props) => {
+    const [questions, setQuestions] = useState([]);
     const { getToken } = useContext(UserProfileContext);
-    const apiUrl = "/api/Skill";
+    const apiUrl = "/api/Question";
 
-    const getAllSkills = () =>
+    const getAllQuestions = () =>
         getToken().then((token) =>
             fetch(apiUrl, {
                 method: "GET",
@@ -17,11 +17,11 @@ export const SkillProvider = (props) => {
                     Authorization: `Bearer ${token}`
                 }
             }).then(resp => resp.json())
-                .then(setSkills));
+                .then(setQuestions));
 
-    const getSkillById = (id) =>
+    const getQuestionById = (id) =>
         getToken().then((token) =>
-            fetch(`/api/skill/${id}`, {
+            fetch(`/api/Question/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -30,7 +30,7 @@ export const SkillProvider = (props) => {
 
 
 
-    const addSkill = (skill) =>
+    const addQuestion = (que) =>
         getToken().then((token) =>
             fetch(apiUrl, {
                 method: "POST",
@@ -38,7 +38,7 @@ export const SkillProvider = (props) => {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(skill)
+                body: JSON.stringify(que)
             }).then(resp => {
                 if (resp.ok) {
                     return resp.json();
@@ -47,24 +47,24 @@ export const SkillProvider = (props) => {
             }));
 
 
-    const deleteSkill = (id) =>
+    const deleteQuestion = (id) =>
         getToken().then((token) =>
-            fetch(`/api/skill/delete/${id}`, {
+            fetch(`/api/Question/delete/${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
-                .then(getAllSkills()))
+                .then(getAllQuestions()))
 
 
 
 
     return (
-        <SkillContext.Provider value={{ skills, getAllSkills, addSkill, getSkillById, deleteSkill }}>
+        <QuestionContext.Provider value={{ questions, getAllQuestions, addQuestion, getQuestionById, deleteQuestion }}>
             {props.children}
-        </SkillContext.Provider>
+        </QuestionContext.Provider>
     );
 };
-export default SkillProvider;
+export default QuestionProvider;
 

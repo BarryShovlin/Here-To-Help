@@ -7,4 +7,7 @@
 
 
 
-SELECT * FROM UserProfile
+SELECT UserSkill.Id, UserSkill.SkillId, UserSkill.UserProfileId, UserSkill.IsKnown, Skill.Id AS SkillId, Skill.Name AS SkillName, u.Id as IdUser, u.FirebaseUserId as FireId, u.name as NameUser, u.Email as EmailUser, u.DateCreated as UDate
+                          FROM UserSkill JOIN Skill on UserSkill.SkillId = Skill.Id JOIN UserProfile u ON UserSkill.UserProfileId = u.Id
+                               
+                         WHERE u.Id = 2

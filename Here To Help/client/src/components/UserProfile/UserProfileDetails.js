@@ -26,7 +26,9 @@ export const UserProfileDetails = () => {
             <div className="userProfile__fullName">Name: {userProfile.name}</div>
             <div className="userProfile__email">Email: {userProfile.email}</div>
             <div className="userProfile__creationDate">Member Since: {userProfile.dateCreated}</div>
+
         </section>
+
 
     )
 }

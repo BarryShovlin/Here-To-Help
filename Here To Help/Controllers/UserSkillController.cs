@@ -39,7 +39,7 @@ namespace Here_To_Help.Controllers
         [HttpGet("getById/{id}")]
         public IActionResult Get(int id)
         {
-            var us = _userSkillRepository.GetUserSkillById(id);
+            var us = _userSkillRepository.GetUserSkillByUserId(id);
             if (us == null)
             {
                 return NotFound();

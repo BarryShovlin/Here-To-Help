@@ -65,7 +65,7 @@ namespace Here_To_Help.Repositories
             }
         }
 
-        public UserSkill GetUserSkillById(int id)
+        public List<UserSkill> GetUserSkillByUserId(int id)
         {
             using (var conn = Connection)
             {
@@ -73,17 +73,18 @@ namespace Here_To_Help.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                          SELECT UserSkill.Id, UserSkill.SkillId, UserSkill.UserProfileId, UserSkill.IsKnown, Skill.Id ad AS SkillId, Skill.Name AS SkillName
-                          FROM UserSkill JOIN Skill on UserSkill.SkillId = Skill.Id
+                          SELECT UserSkill.Id, UserSkill.SkillId, UserSkill.UserProfileId, UserSkill.IsKnown, Skill.Id AS SkillId, Skill.Name AS SkillName, u.Id as IdUser, u.FirebaseUserId as FireId, u.name as NameUser, u.Email as EmailUser, u.DateCreated as UDate
+                          FROM UserSkill JOIN Skill on UserSkill.SkillId = Skill.Id JOIN UserProfile u ON UserSkill.UserProfileId = u.Id
                                
-                         WHERE UserSkill.Id = @Id";
+                         WHERE u.Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
 
                     UserSkill userSkill = null;
-
                     var reader = cmd.ExecuteReader();
-                    if (reader.Read())
+
+                    var UserSkills = new List<UserSkill>();
+                    while (reader.Read())
                     {
                         userSkill = new UserSkill()
                         {
@@ -95,13 +96,22 @@ namespace Here_To_Help.Repositories
                             {
                                 Id = DbUtils.GetInt(reader, "SkillId"),
                                 Name = DbUtils.GetString(reader, "SkillName")
-                            }
+                            },
+                            UserProfile = new UserProfile()
+                            {
+                                Id = DbUtils.GetInt(reader, "IdUser"),
+                                FirebaseUserId = DbUtils.GetString(reader, "FireId"),
+                                Name = DbUtils.GetString(reader, "NameUser"),
+                                Email = DbUtils.GetString(reader, "EmailUser"),
+                                DateCreated = DbUtils.GetDateTime(reader, "UDate")
+                                
+                            }                    
                         };
-
+                        UserSkills.Add(userSkill);
                     }
                     reader.Close();
 
-                    return userSkill;
+                    return UserSkills;
                 }
             }
         }
