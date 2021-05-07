@@ -12,6 +12,10 @@ import { CurrentUserProfileDetails } from "../components/UserProfile/CurrentUser
 import { SkillProvider } from "../providers/SkillProvider"
 import { UserSkillProvider } from "../providers/UserSkillProvider"
 import { AddUserSkillForm } from "./UserSkill/AddUserSkillForm"
+import { PostList } from "./Post/PostList"
+import { PostDetails } from "./Post/PostDetails"
+import { AddPostForm } from "./Post/AddPost"
+import { PostProvider } from "../providers/PostProvider";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -52,6 +56,23 @@ export default function ApplicationViews() {
                     </Route>
                 </UserSkillProvider>
             </SkillProvider>
+
+            <PostProvider>
+                <SkillProvider>
+                    <Route exact path="/Post">
+                        {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
+                    </Route>
+
+                    <Route exact path="/Post/GetById/:postId(\d+)">
+                        <PostDetails />
+                    </Route>
+
+                    <Route exact path="/Posts/NewPost">
+                        <AddPostForm />
+                    </Route>
+
+                </SkillProvider>
+            </PostProvider>
 
 
         </main>

@@ -10,7 +10,6 @@ export const AddUserSkillForm = () => {
     const { addUserSkill, getAllUserSkills } = useContext(UserSkillContext)
     const { getAllSkills, skills } = useContext(SkillContext)
     const [userSkill, setUserSkill] = useState({
-        Name: "",
         SkillId: 0,
         iUserProfileId: 0,
         IsKnown: false
@@ -36,11 +35,11 @@ export const AddUserSkillForm = () => {
 
     const handleSaveUserSkill = () => {
         addUserSkill({
-            Name: skill.name,
-            SkillId: skill.id,
+            SkillId: userSkill.skillId,
             UserProfileId: currentUser.id,
             IsKnown: true
         })
+
 
     };
 
@@ -49,11 +48,11 @@ export const AddUserSkillForm = () => {
             <h2 className="post_form_header">What kind of projects can you help other users accomplish?</h2>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="skillId">Skill: </label>
-                    <select name="skillId" id="skillId" className="form-control" onChange={handleControlledInputChange}>
+                    <label htmlFor="SkillId">Skill: </label>
+                    <select name="skillId" id="SkillId" className="form-control" onChange={handleControlledInputChange}>
                         <option value="0">Select a Skill</option>
                         {skills.map(skill => (
-                            <option key={skill.id} value={skill.id}>
+                            <option key={skill.Id} value={skill.id}>
                                 {skill.name}
                             </option>
                         ))}

@@ -31,7 +31,7 @@ export const UserSkillProvider = (props) => {
 
 
 
-    const addUserSkill = (skill) =>
+    const addUserSkill = (userSkill) =>
         getToken().then((token) =>
             fetch(apiUrl, {
                 method: "POST",
@@ -39,7 +39,7 @@ export const UserSkillProvider = (props) => {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(skill)
+                body: JSON.stringify(userSkill)
             }).then(resp => {
                 if (resp.ok) {
                     return resp.json();
