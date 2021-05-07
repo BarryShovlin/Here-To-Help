@@ -21,7 +21,7 @@ export const QuestionProvider = (props) => {
 
     const getQuestionById = (id) =>
         getToken().then((token) =>
-            fetch(`/api/Question/${id}`, {
+            fetch(`/api/Question/getById/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,

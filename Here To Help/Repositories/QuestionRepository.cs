@@ -92,7 +92,7 @@ namespace Here_To_Help.Repositories
                 {
                     cmd.CommandText = @"
                        SELECT q.Id, q.Title, q.Content, q.userProfileId, q.SkillId, q.DateCreated, u.Id AS IdUserprofile, u.FirebaseUserId AS FireId, u.Name AS NameUser, u.Email AS UserEmail, u.UserName AS UserName, u.DateCreated as UCreate, s.name AS SkillName, s.Id AS IdSkill
-                         FROM Question q JOIN UserProfile u ON q.UserProfileId = u.Id JOIN Sk
+                         FROM Question q JOIN UserProfile u ON q.UserProfileId = u.Id JOIN Skill s ON q.SkillId = s.id
                                
                          WHERE q.Id = @Id";
 
