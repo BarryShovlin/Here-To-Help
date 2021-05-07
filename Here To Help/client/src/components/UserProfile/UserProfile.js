@@ -1,18 +1,27 @@
 import React, { useContext } from "react"
 import { UserProfileContext } from "../../providers/UserProfileProvider"
-import { Link } from "react-router-dom"
+import { useHistory } from "react-router-dom"
+import { Button, Card } from "reactstrap"
 
 
 
 export const UserProfile = ({ userProfile }) => {
 
+    const history = useHistory();
+
     return (
-        <section className="userProfile">
-            <h3 className="userProfileTitle">
-                <Link to={`/userProfile/detail/getById/${userProfile.id}`}>
+        <Card>
+            <section className="userProfile">
+                <h3 className="userProfileTitle">
                     {userProfile.userName}
-                </Link>
-            </h3>
-        </section>
+                </h3>
+                <div className="userProfile-realname">{userProfile.name}</div>
+                <Button onClick={() => {
+                    history.push(`/userProfile/detail/getById/${userProfile.id}`)
+                }} > View Profile
+            </Button>
+            </section >
+        </Card>
     )
 }
+
