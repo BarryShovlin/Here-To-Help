@@ -39,7 +39,7 @@ export const AddPostForm = () => {
             title: post.title,
             Url: post.url,
             content: post.content,
-            createDateTime: new Date(Date.now),
+            createDateTime: new Date(),
             UserProfileId: userProfileId.id,
             SkillId: post.skillId,
         })

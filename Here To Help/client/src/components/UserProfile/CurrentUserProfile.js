@@ -5,11 +5,12 @@ import { UserSkillContext } from "../../providers/UserSkillProvider"
 import { SkillContext } from "../../providers/SkillProvider"
 import { UserSkill } from "../UserSkill/UserSkill"
 import { Button } from "reactstrap"
+import { PostContext } from "../../providers/PostProvider"
 
 export const CurrentUserProfileDetails = () => {
 
     const { userProfiles, getUserProfileById } = useContext(UserProfileContext)
-
+    const { posts, getPosts } = useContext(PostContext);
     const { userSkills, getUserSkillsByUserId, getAllUserSkills } = useContext(UserSkillContext)
 
 
@@ -30,10 +31,14 @@ export const CurrentUserProfileDetails = () => {
 
     useEffect(() => {
         getAllUserSkills()
+            .then(getPosts())
     }, [])
 
     const CurrentUserSkills = userSkills.filter(s => s.userProfileId === userProfileId.id)
     const date = new Date(userProfile.dateCreated).toLocaleString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' })
+    const userSkillPosts = posts.map(p => {
+        return CurrentUserSkills.filter(s => s.SkillId === p.SKillId)
+    })
 
     return (
 
@@ -70,6 +75,7 @@ export const CurrentUserProfileDetails = () => {
             </article>
             <section className="NewPosts">
                 <h1 className="News_header">New Posts for {userProfile.userName}</h1>
+                <div className="UserInterestPosts">{userSkillPosts.map()}</div>
 
             </section>
         </article>

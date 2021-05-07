@@ -4,4 +4,6 @@
 
 
 
-SELECT * FROM UserSkill
+UPDATE Post
+SET SkillId = 2
+Where Post.Id = 1

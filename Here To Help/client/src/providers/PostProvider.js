@@ -45,7 +45,7 @@ export const PostProvider = (props) => {
 
     const addPost = (post) => {
         return getToken().then((token) =>
-            fetch("/api/Post/add", {
+            fetch("/api/Post", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,

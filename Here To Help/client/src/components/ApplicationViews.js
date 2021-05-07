@@ -25,7 +25,9 @@ export default function ApplicationViews() {
             <Switch>
                 <Route path="/" exact>
                     <UserSkillProvider>
-                        {isLoggedIn ? <CurrentUserProfileDetails /> : <Redirect to="/login" />}
+                        <PostProvider>
+                            {isLoggedIn ? <CurrentUserProfileDetails /> : <Redirect to="/login" />}
+                        </PostProvider>
                     </UserSkillProvider>
                 </Route>
 
