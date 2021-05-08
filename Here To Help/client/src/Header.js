@@ -30,7 +30,6 @@ export default function Header() {
                                 <NavLink tag={RRNavLink} className="nav-link" to="/userProfiles">User Profiles</NavLink>
                                 <NavLink tag={RRNavLink} className="nav-link" to="/Skills">Skills</NavLink>
                                 <NavLink tag={RRNavLink} className="nav-link" to="/Question">Help Out</NavLink>
-                                <NavLink tag={RRNavLink} className="nav-link" to="/Question/getById">My Project Questions</NavLink>
                                 <NavLink tag={RRNavLink} className="nav-link" to="/Post">All Posts</NavLink>
                                 <NavLink tag={RRNavLink} className="nav-link" to="/Posts/NewPost">New Post</NavLink>
                             </NavItem>

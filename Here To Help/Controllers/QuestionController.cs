@@ -3,19 +3,22 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using Here_To_Help.Models;
 using Here_To_Help.Repositories;
+using System.Security.Claims;
 
 namespace Here_To_Help.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
 
     public class QuestionController : ControllerBase
     {
         private readonly IQuestionRepository _questionRepository;
-        public QuestionController(IQuestionRepository questionRepository)
+        private readonly IUserProfileRepository _userProfileRepository;
+        public QuestionController(IQuestionRepository questionRepository, IUserProfileRepository userProfileRepository)
         {
             _questionRepository = questionRepository;
+            _userProfileRepository = userProfileRepository;
         }
 
 
@@ -38,9 +41,10 @@ namespace Here_To_Help.Controllers
             return Ok(up);
         }
 
-        [HttpPost]
+        [HttpPost("add")]
         public IActionResult Post(Question Question)
         {
+            Question.DateCreated = DateTime.Now;
             _questionRepository.Add(Question);
             return CreatedAtAction("Details", new { id = Question.Id }, Question);
         }
@@ -55,14 +59,22 @@ namespace Here_To_Help.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Question que)
         {
-            if (id != que.Id)
-            {
-                return BadRequest();
-            }
-
+            var user = GetCurrentUser();
+            que.DateCreated = DateTime.Now;
+            if (user == null) return NotFound();
             _questionRepository.Update(que);
             return NoContent();
         }
 
+        [HttpGet("getByUserId/{id}")]
+        public IActionResult GetByUserId(int id)
+        {
+            return Ok(_questionRepository.GetQuestionsByUserId(id));
+        }
+        private UserProfile GetCurrentUser()
+        {
+            var firebaseId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseId);
+        }
     }
 }

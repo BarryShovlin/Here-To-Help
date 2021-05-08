@@ -28,11 +28,20 @@ export const QuestionProvider = (props) => {
                 }
             }).then((res) => res.json()))
 
+    const getQuestionsByUserId = (id) =>
+        getToken().then((token) =>
+            fetch(`/api/Question/getByUserId/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            }).then((res) => res.json()))
+
 
 
     const addQuestion = (que) =>
         getToken().then((token) =>
-            fetch(apiUrl, {
+            fetch("/api/Question/add", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -45,6 +54,18 @@ export const QuestionProvider = (props) => {
                 }
                 throw new Error("Unauthorized");
             }));
+
+    const editQuestion = (que) =>
+        getToken().then((token) =>
+            fetch(`/api/Question/${que.id}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(que)
+            })
+                .then(getQuestionById(que.id)))
 
 
     const deleteQuestion = (id) =>
@@ -61,7 +82,7 @@ export const QuestionProvider = (props) => {
 
 
     return (
-        <QuestionContext.Provider value={{ questions, getAllQuestions, addQuestion, getQuestionById, deleteQuestion }}>
+        <QuestionContext.Provider value={{ questions, getAllQuestions, addQuestion, getQuestionById, deleteQuestion, getQuestionsByUserId, editQuestion }}>
             {props.children}
         </QuestionContext.Provider>
     );

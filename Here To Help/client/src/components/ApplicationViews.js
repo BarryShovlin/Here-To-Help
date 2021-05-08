@@ -19,6 +19,10 @@ import { PostProvider } from "../providers/PostProvider";
 import { QuestionProvider } from "../providers/QuestionProvider"
 import { QuestionList } from "../components/Question/QuestionList"
 import { QuestionDetails } from "../components/Question/QuestionDetails"
+import { UserQuestionList } from "../components/Question/UserQuestionList"
+import { EditQuestion } from "./Question/EditQuestion";
+import { DeleteQuestion } from "./Question/DeleteQuestion"
+import { AddQuestionForm } from "./Question/AddQuestion"
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -87,6 +91,18 @@ export default function ApplicationViews() {
                     </Route>
                     <Route exact path="/Question/getById/:questionId(\d+)">
                         <QuestionDetails />
+                    </Route>
+                    <Route exact path="/Question/getByUserId/:questionId(\d+)">
+                        {isLoggedIn ? <UserQuestionList /> : <Redirect to="/login" />}
+                    </Route>
+                    <Route exact path="/Question/:questionId(\d+)">
+                        {isLoggedIn ? <EditQuestion /> : <Redirect to="/login" />}
+                    </Route>
+                    <Route exact path="/Question/delete/:questionId(\d+)">
+                        {isLoggedIn ? <DeleteQuestion /> : <Redirect to="/login" />}
+                    </Route>
+                    <Route exact path="/Question/add">
+                        <AddQuestionForm />
                     </Route>
                 </SkillProvider>
             </QuestionProvider>

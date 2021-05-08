@@ -1,0 +1,51 @@
+import React, { useContext, useEffect } from "react";
+import { QuestionContext } from "../../providers/QuestionProvider";
+import { Link } from "react-router-dom";
+import { Form, Button, Row, Container, Col } from "reactstrap";
+import "./Question.css"
+
+
+export const UserQuestionList = () => {
+    const { questions, getAllQuestions, getQuestionsByUserId } = useContext(QuestionContext);
+
+
+
+    useEffect(() => {
+        getAllQuestions();
+    }, []);
+
+    console.log(questions)
+    const userProfile = JSON.parse(sessionStorage.getItem("userProfile"))
+
+    return (
+        <div className="posts-container">
+            <Col className="posts-header">
+                <h1>My Project Questions</h1>
+            </Col>
+            <hr></hr>
+            <Col>
+                {questions.map((que) => {
+                    if (que.userProfileId === userProfile.id) {
+                        return <div className="post-card" key={que.id}>
+                            <Link to={`/Question/getById/${que.id}`}>
+                                <h3 className="posts-title">
+                                    {que.title}
+                                </h3>
+                            </Link>
+                            <p className="posts--category">{que.skill.name}</p>
+                            <p className="posts--author">Added by: {que.userProfile.userName}</p>
+                            <Button className="QuestionEditBtn" size="sm" outline color="secondary">
+                                <Link to={`/Question/${que.id}`} style={{ color: `#000` }}>Edit Your Question</Link>
+                            </Button>
+                            <Button className="QuestionDeleteBtn" size="sm" outline color="secondary">
+                                <Link to={`/Question/delete/${que.id}`} style={{ color: `#000` }}> Remove This Question</Link>
+                            </Button>
+                        </div>
+                    }
+                })}
+            </Col>
+        </div>
+    );
+};
+
+export default UserQuestionList;

@@ -17,7 +17,7 @@ export const UserProfileDetails = () => {
     }, [])
 
 
-
+    const date = new Date(userProfile.dateCreated).toLocaleString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' })
 
     console.log(userProfile)
     return (
@@ -25,7 +25,7 @@ export const UserProfileDetails = () => {
             <h3 className="userProfile__displayName">{userProfile.userName}</h3>
             <div className="userProfile__fullName">Name: {userProfile.name}</div>
             <div className="userProfile__email">Email: {userProfile.email}</div>
-            <div className="userProfile__creationDate">Member Since: {userProfile.dateCreated}</div>
+            <div className="userProfile__creationDate">Member Since: {date}</div>
 
         </section>
 
