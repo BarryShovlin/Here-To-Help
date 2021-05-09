@@ -12,7 +12,7 @@ export const UserSkill = ({ skill }) => {
                         <strong>{skill.name}</strong>
                     </p>
                     <Button className="button" color="primary" size="sm" outline color="secondary">
-                        <Link className=" deleteCategory" to={`/userSkill/delete/${skill.id}`} style={{ color: `#000` }} >
+                        <Link className=" deleteUserSkill" to={`/userSkill/delete/${skill.id}`} style={{ color: `#000` }} >
                             Delete
                             </Link>
                     </Button>

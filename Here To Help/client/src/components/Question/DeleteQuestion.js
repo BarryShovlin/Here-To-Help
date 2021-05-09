@@ -23,12 +23,12 @@ export const DeleteQuestion = () => {
     console.log(currentUser)
     const handleQuestionDelete = () => {
         deleteQuestion(questionId)
-            .then(getQuestionsByUserId)
-            .then(history.push(`Question/getByUserId/${currentUser.id}`))
+            .then(getQuestionsByUserId(currentUser.id))
+            .then(history.push(`/Question/getByUserId/${currentUser.id}`))
     }
 
     const handleCancel = () => {
-        history.push(`Question/getByUserId/${currentUser.id}`)
+        history.push(`/Question/getByUserId/${currentUser.id}`)
     }
 
     return (

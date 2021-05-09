@@ -39,21 +39,18 @@ export const QuestionProvider = (props) => {
 
 
 
-    const addQuestion = (que) =>
-        getToken().then((token) =>
-            fetch("/api/Question/add", {
+    const addQuestion = (que) => {
+        return getToken().then((token) =>
+            fetch("/api/Question/new", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(que)
-            }).then(resp => {
-                if (resp.ok) {
-                    return resp.json();
-                }
-                throw new Error("Unauthorized");
-            }));
+            }).then((res) => res.json())
+        )
+    };
 
     const editQuestion = (que) =>
         getToken().then((token) =>
@@ -76,7 +73,7 @@ export const QuestionProvider = (props) => {
                     Authorization: `Bearer ${token}`
                 }
             })
-                .then(getAllQuestions()))
+        )
 
 
 

@@ -59,6 +59,41 @@ namespace Here_To_Help.Repositories
                 }
             }
         }
+
+        public List<Post> GetPostsByUserSkills(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT p.Id, p.Title, p.Url, p.Content, p.SkillId, p.UserProfileId, us.Id as USkillId, us.SkillId as USkillId, us.UserProfileId as UPId
+                        FROM Post p JOIN UserSkill us ON p.UserProfileId = us.UserProfileId
+                            WHERE p.Id = @Id";
+
+                    Post post = null;
+                    var reader = cmd.ExecuteReader();
+
+                    var posts = new List<Post>();
+                    while (reader.Read())
+                    {
+                        post = new Post()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Title = reader.GetString(reader.GetOrdinal("Title")),
+                            Url = reader.GetString(reader.GetOrdinal("Url")),
+                            Content = reader.GetString(reader.GetOrdinal("Content")),
+                            UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                            SkillId = reader.GetInt32(reader.GetOrdinal("SkillId")),
+                            DateCreated = reader.GetDateTime(reader.GetOrdinal("DateCreated")),
+                        };
+                        posts.Add(post);
+                    }
+                    reader.Close();
+                    return posts;
+                }
+            }
+        }
         public void Add(Post post)
         {
             using (var conn = Connection)

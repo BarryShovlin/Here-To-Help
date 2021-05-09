@@ -21,6 +21,9 @@ export const UserQuestionList = () => {
         <div className="posts-container">
             <Col className="posts-header">
                 <h1>My Project Questions</h1>
+                <Button className="AskQuestion" color="primary" size="sm" outline color="secondary">
+                    <Link to={"/Question/new"} style={{ color: `#000` }}>Ask a New Question</Link>
+                </Button>
             </Col>
             <hr></hr>
             <Col>

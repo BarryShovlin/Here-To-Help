@@ -67,9 +67,7 @@ export const PostProvider = (props) => {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(postId),
+                }
             })
         )
     };

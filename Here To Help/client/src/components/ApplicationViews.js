@@ -15,6 +15,7 @@ import { AddUserSkillForm } from "./UserSkill/AddUserSkillForm"
 import { PostList } from "./Post/PostList"
 import { PostDetails } from "./Post/PostDetails"
 import { AddPostForm } from "./Post/AddPost"
+import { DeletePost } from "./Post/DeletePost"
 import { PostProvider } from "../providers/PostProvider";
 import { QuestionProvider } from "../providers/QuestionProvider"
 import { QuestionList } from "../components/Question/QuestionList"
@@ -23,6 +24,8 @@ import { UserQuestionList } from "../components/Question/UserQuestionList"
 import { EditQuestion } from "./Question/EditQuestion";
 import { DeleteQuestion } from "./Question/DeleteQuestion"
 import { AddQuestionForm } from "./Question/AddQuestion"
+import UserSkillSelect from "./UserSkill/UserSkillSelect";
+import DeleteUserSkill from "./UserSkill/DeleteUserSkill";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -31,11 +34,12 @@ export default function ApplicationViews() {
         <main>
             <Switch>
                 <Route path="/" exact>
-                    <PostProvider>
-                        <UserSkillProvider>
+                    <UserSkillProvider>
+                        <PostProvider>
                             {isLoggedIn ? <CurrentUserProfileDetails /> : <Redirect to="/login" />}
-                        </UserSkillProvider>
-                    </PostProvider>
+                        </PostProvider>
+                    </UserSkillProvider>
+
                 </Route>
 
                 <Route path="/login">
@@ -63,6 +67,12 @@ export default function ApplicationViews() {
                     <Route exact path="/UserSkill">
                         <AddUserSkillForm />
                     </Route>
+                    <Route exact path="/userSkill/delete/:userSkillId(\d+)">
+                        {isLoggedIn ? <DeleteUserSkill /> : <Redirect to="/login" />}
+                    </Route>
+                    <Route exact path="/Skill">
+                        {isLoggedIn ? <UserSkillSelect /> : <Redirect to="/login" />}
+                    </Route>
                 </UserSkillProvider>
             </SkillProvider>
 
@@ -78,6 +88,9 @@ export default function ApplicationViews() {
 
                     <Route exact path="/Posts/NewPost">
                         <AddPostForm />
+                    </Route>
+                    <Route exact path="/post/delete/:postId(\d+)">
+                        {isLoggedIn ? <DeletePost /> : <Redirect to="/login" />}
                     </Route>
 
                 </SkillProvider>
@@ -101,8 +114,8 @@ export default function ApplicationViews() {
                     <Route exact path="/Question/delete/:questionId(\d+)">
                         {isLoggedIn ? <DeleteQuestion /> : <Redirect to="/login" />}
                     </Route>
-                    <Route exact path="/Question/add">
-                        <AddQuestionForm />
+                    <Route exact path="/Question/new">
+                        {isLoggedIn ? <AddQuestionForm /> : <Redirect to="/" />}
                     </Route>
                 </SkillProvider>
             </QuestionProvider>

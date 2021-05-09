@@ -37,7 +37,7 @@ export const AddPostForm = () => {
     const handleSavePost = () => {
         addPost({
             title: post.title,
-            Url: post.url,
+            url: post.url,
             content: post.content,
             createDateTime: new Date(),
             UserProfileId: userProfileId.id,
@@ -58,7 +58,7 @@ export const AddPostForm = () => {
                 <div className="form-group">
                     <label htmlFor="imageLocation">Url:</label>
                     <input
-                        type="text" id="Url" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="Url" value={post.url} />
+                        type="text" id="url" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="Url" value={post.url} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="content">Content:</label>

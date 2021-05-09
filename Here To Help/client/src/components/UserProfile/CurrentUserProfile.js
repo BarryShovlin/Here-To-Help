@@ -16,6 +16,7 @@ export const CurrentUserProfileDetails = () => {
 
 
     const [userProfile, setUserProfile] = useState({ userProfile: {} })
+    const [post, setPosts] = useState({})
 
 
 
@@ -28,16 +29,23 @@ export const CurrentUserProfileDetails = () => {
                 setUserProfile(response)
             })
             .then(getUserSkillsByUserId(userProfileId.id))
-            .then(getPosts())
-            .then(console.log(posts))
+            .then(getPosts)
     }, [])
 
     useEffect(() => {
         getAllUserSkills()
+            .then(getPosts())
     }, [])
 
     const CurrentUserSkills = userSkills.filter(s => s.userProfileId === userProfileId.id)
     const date = new Date(userProfile.dateCreated).toLocaleString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' })
+    const currentUserSkillSkillIds = CurrentUserSkills.map(s => {
+        return s.SkillId
+    })
+    const profilePosts = posts.map(p => {
+        return CurrentUserSkills.find(s => s.SkillId === p.SkillId)
+    })
+    console.log(profilePosts)
 
     return (
 
@@ -52,10 +60,10 @@ export const CurrentUserProfileDetails = () => {
                 <Link to={`/Question/getByUserId/${userProfileId.id}`} style={{ color: `#000` }}>My Project Questions</Link>
             </Button>
             <Button className="AskQuestion" color="primary" size="sm" outline color="secondary">
-                <Link to={"/Question/add"} style={{ color: `#000` }}>Ask a New Question</Link>
+                <Link to={"/Question/new"} style={{ color: `#000` }}>Ask a New Question</Link>
             </Button>
             <article className="UserSkills">
-                <h3 className="UserSkillsHeader">Skills You Have</h3>
+                <h3 className="UserSkillsHeader">Your Current Skills</h3>
                 <div className="AddSkill">
                     <Button className="AddSkillButton" color="primary" size="sm" outline color="secondary">
                         <Link className="addSkill" to={`/userSkill`} style={{ color: `#000` }} >
@@ -80,6 +88,9 @@ export const CurrentUserProfileDetails = () => {
             </article>
             <section className="NewPosts">
                 <h1 className="News_header">New Posts for {userProfileId.userName}</h1>
+                <div>
+
+                </div>
             </section>
         </article>
 

@@ -116,6 +116,40 @@ namespace Here_To_Help.Repositories
             }
         }
 
+        public UserSkill GetUserSkillById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                          SELECT UserSkill.Id, UserSkill.SkillId, UserSkill.UserProfileId, UserSkill.IsKnown
+                          FROM UserSkill
+                               
+                         WHERE UserSkill.Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", id);
+
+                    UserSkill userSkill = null;
+                    var reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        userSkill = new UserSkill()
+                        {
+                            Id = DbUtils.GetInt(reader, "id"),
+                            SkillId = DbUtils.GetInt(reader, "SkillId"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                            IsKnown = DbUtils.GetBool(reader, "IsKnown"),
+                        };
+                    }
+                    reader.Close();
+                    return userSkill;
+                }
+            }
+        }
+
         public void Delete(int UserSkillId)
         {
             using (var conn = Connection)

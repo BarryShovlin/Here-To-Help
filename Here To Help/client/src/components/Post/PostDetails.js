@@ -21,6 +21,8 @@ export const PostDetails = () => {
                 setPost(res)
             })
     }, []);
+    const currentUser = JSON.parse(sessionStorage.getItem("userProfile"))
+
 
 
     return (
@@ -36,12 +38,21 @@ export const PostDetails = () => {
                     <p className="postContent">{post.content}</p>
                 </div>
             </div>
-            <button onClick={() => {
+            <Button color="secondary" size="sm" onClick={() => {
                 history.push(`/comments/${postId}`)
-            }}>View Comments</button>
-            <button onClick={() => {
+            }}>View Comments</Button>
+            <Button onClick={() => {
                 history.push(`/comment/${postId}/create`)
-            }}>Add A Comment</button>
+            }}>Add A Comment</Button>
+            <Button class="deleteBtn" color="secondary" size="sm" onClick={() => {
+                if (currentUser.id === post.userProfileId) {
+                    history.push(`/post/delete/${post.id}`)
+                } else {
+                    window.alert("You may only delete posts you have created")
+                }
+            }
+            }> Delete This Post
+            </Button>
         </>
     );
 };

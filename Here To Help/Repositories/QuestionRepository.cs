@@ -219,7 +219,7 @@ namespace Here_To_Help.Repositories
                     cmd.CommandText = @"
                         Update Question
                             Set Title = @Title,
-                                Content = @Content
+                                Content = @Content,
                                 SkillId = @SkillId
                             WHERE Id = @Id";
 

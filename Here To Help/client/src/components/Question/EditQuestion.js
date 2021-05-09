@@ -11,11 +11,11 @@ export const EditQuestion = () => {
     const { questionId } = useParams();
 
     const [question, setQuestion] = useState({});
+    const [skill, setSkills] = useState({});
 
     useEffect(() => {
         getQuestionById(questionId)
             .then((res) => setQuestion(res))
-
             .then(getAllSkills)
     }, [])
 
@@ -31,6 +31,7 @@ export const EditQuestion = () => {
 
     const handleSave = () => {
         editQuestion({
+            id: question.id,
             title: question.title,
             content: question.content,
             skillId: question.skillId,
@@ -52,7 +53,7 @@ export const EditQuestion = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="skillId">Skill: </label>
-                    <select name="skillId" id="skillId" className="form-control" onChange={handleControlledInputChange}>
+                    <select name="skillId" id="skillId" className="form-control" placeholder={skill.name} onChange={handleControlledInputChange}>
                         <option value="0">Select a skill</option>
                         {skills.map(s => (
                             <option key={s.id} value={s.id}>

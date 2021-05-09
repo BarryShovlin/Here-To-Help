@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace Here_To_Help.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 
@@ -41,12 +41,12 @@ namespace Here_To_Help.Controllers
             return Ok(up);
         }
 
-        [HttpPost("add")]
+        [HttpPost("new")]
         public IActionResult Post(Question Question)
         {
             Question.DateCreated = DateTime.Now;
             _questionRepository.Add(Question);
-            return CreatedAtAction("Details", new { id = Question.Id }, Question);
+            return CreatedAtAction("Get", new { id = Question.Id }, Question);
         }
 
         [HttpDelete("delete/{id}")]

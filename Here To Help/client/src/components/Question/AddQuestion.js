@@ -17,6 +17,7 @@ export const AddQuestionForm = () => {
         userProfileId: 0,
         skillId: 0
     });
+    const [skill] = useState({})
 
     useEffect(() => {
         getAllQuestions()
@@ -67,7 +68,7 @@ export const AddQuestionForm = () => {
                 </div>
             </fieldset>
             <Button color="primary" onClick={handleSaveQuestion}>
-                <Link className="savePost" to={"/Posts"} style={{ color: `#FFF` }}>
+                <Link className="saveQuestion" to={`/Question/getByUserId/${currentUser.id}`} style={{ color: `#FFF` }}>
                     Ask Question
                 </Link>
             </Button>

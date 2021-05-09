@@ -21,6 +21,16 @@ export const UserSkillProvider = (props) => {
 
     const getUserSkillsByUserId = (id) => {
         return getToken().then((token) =>
+            fetch(`/api/userSkill/getByUserId/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            }).then((res) => res.json()))
+    };
+
+    const getUserSkillById = (id) => {
+        return getToken().then((token) =>
             fetch(`/api/userSkill/getById/${id}`, {
                 method: "GET",
                 headers: {
@@ -62,7 +72,7 @@ export const UserSkillProvider = (props) => {
 
 
     return (
-        <UserSkillContext.Provider value={{ userSkills, getAllUserSkills, addUserSkill, getUserSkillsByUserId, deleteUserSkill }}>
+        <UserSkillContext.Provider value={{ userSkills, getAllUserSkills, addUserSkill, getUserSkillsByUserId, getUserSkillById, deleteUserSkill }}>
             {props.children}
         </UserSkillContext.Provider>
     );

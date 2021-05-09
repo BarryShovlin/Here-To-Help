@@ -5,7 +5,7 @@ import { SkillContext } from "../../providers/SkillProvider"
 import { UserSkillContext } from "../../providers/UserSkillProvider"
 
 
-export const AddUserSkillForm = () => {
+export const UserSkillSelect = () => {
 
     const { addUserSkill, getAllUserSkills } = useContext(UserSkillContext)
     const { getAllSkills, skills } = useContext(SkillContext)
@@ -38,7 +38,7 @@ export const AddUserSkillForm = () => {
         addUserSkill({
             skillId: userSkill.skillId,
             userProfileId: currentUser.id,
-            isKnown: true
+            isKnown: false
         })
 
 
@@ -46,7 +46,7 @@ export const AddUserSkillForm = () => {
 
     return (
         <section className="post_form">
-            <h2 className="post_form_header">What kind of projects can you help other users accomplish?</h2>
+            <h2 className="post_form_header">What Are You Interested In Learning More About?</h2>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="skillId">Skill: </label>
@@ -62,11 +62,16 @@ export const AddUserSkillForm = () => {
             </fieldset>
             <Button color="primary" onClick={handleSaveUserSkill}>
                 <Link className="saveUserSkill" to={"/"} style={{ color: `#FFF` }}>
-                    Save This to your skillset
+                    Save and return to your profile page
+                </Link>
+            </Button>
+            <Button color="primary" onClick={handleSaveUserSkill}>
+                <Link className="saveUserSkill" to={"/Skill"} style={{ color: `#FFF` }}>
+                    Save and add another interest
                 </Link>
             </Button>
 
         </section>
     );
 };
-export default AddUserSkillForm;
+export default UserSkillSelect;

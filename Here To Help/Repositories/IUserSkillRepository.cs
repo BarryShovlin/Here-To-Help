@@ -9,5 +9,6 @@ namespace Here_To_Help.Repositories
         List<UserSkill> GetAllUserSkills();
         List<UserSkill> GetUserSkillByUserId(int id);
         void Delete(int UserSKillId);
+        UserSkill GetUserSkillById(int id);
     }
 }
