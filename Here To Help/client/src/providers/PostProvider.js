@@ -72,9 +72,9 @@ export const PostProvider = (props) => {
         )
     };
 
-    const getPostsByCategoryId = (categoryId) =>
-        getToken().then((token) =>
-            fetch(`https://localhost:5001/api/Post/getByCategory?categoryId=${categoryId}`, {
+    const getPostsByUserSkill = (userSkillId) => {
+        return getToken().then((token) =>
+            fetch(`/api/Post/getByUserSkill/${userSkillId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -82,6 +82,7 @@ export const PostProvider = (props) => {
             })
                 .then((res) => res.json())
                 .then(setPosts))
+    }
 
 
     const getPostById = (postId) =>
@@ -109,7 +110,7 @@ export const PostProvider = (props) => {
                 .then(getPostById(post.id)))
 
     return (
-        <PostContext.Provider value={{ posts, getPosts, getUserPosts, getPostDetails, getPostById, getPostsByCategoryId, addPost, editPost, deletePost }}>
+        <PostContext.Provider value={{ posts, getPosts, getUserPosts, getPostDetails, getPostById, getPostsByUserSkill, addPost, editPost, deletePost }}>
             {props.children}
         </PostContext.Provider>
     );

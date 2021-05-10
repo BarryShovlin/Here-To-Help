@@ -4,7 +4,7 @@ import { Button } from "reactstrap";
 import { useParams, useHistory } from "react-router-dom";
 
 export const DeleteUserSkill = () => {
-    const { deleteUserSkill, getUserSkillById, userSkills } = useContext(UserSkillContext);
+    const { deleteUserSkill, getAllUserSkills, getUserSkillById, userSkills } = useContext(UserSkillContext);
 
     const { userSkillId } = useParams();
 
@@ -23,6 +23,7 @@ export const DeleteUserSkill = () => {
     console.log(currentUser)
     const handleUserSkillDelete = () => {
         deleteUserSkill(userSkillId)
+            .then(getAllUserSkills())
             .then(history.push("/"))
     }
 
@@ -30,9 +31,11 @@ export const DeleteUserSkill = () => {
         history.push("/")
     }
 
+    console.log(userSkill)
+
     return (
         <section>
-            <div className="delete_message"> Are you sure you want to delete {userSkill.title} from your list?</div>
+            <div className="delete_message"> Are you sure you want to delete {userSkill.skill?.name} from your list?</div>
             <Button className="delete" onClick={handleUserSkillDelete}>Delete</Button>
             <Button className="cancel" onClick={handleCancel}>Cancel</Button>
 

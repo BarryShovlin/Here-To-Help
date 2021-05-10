@@ -124,10 +124,10 @@ namespace Here_To_Help.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                          SELECT UserSkill.Id, UserSkill.SkillId, UserSkill.UserProfileId, UserSkill.IsKnown
-                          FROM UserSkill
+                          SELECT UserSkill.Id, UserSkill.SkillId, UserSkill.UserProfileId, UserSkill.IsKnown, Skill.Id As IdSkill, Skill.Name NameSkill
+                          FROM UserSkill JOIN Skill ON UserSkill.SkillId = Skill.Id
                                
-                         WHERE UserSkill.Id = @Id";
+                         WHERE UserSkill.SkillId = @Id";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
 
@@ -142,6 +142,11 @@ namespace Here_To_Help.Repositories
                             SkillId = DbUtils.GetInt(reader, "SkillId"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
                             IsKnown = DbUtils.GetBool(reader, "IsKnown"),
+                            Skill = new Skill()
+                            {
+                                Id = DbUtils.GetInt(reader, "IdSkill"),
+                                Name = DbUtils.GetString(reader, "NameSkill")
+                            }
                         };
                     }
                     reader.Close();

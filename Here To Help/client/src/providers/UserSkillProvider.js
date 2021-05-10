@@ -58,8 +58,8 @@ export const UserSkillProvider = (props) => {
             }));
 
 
-    const deleteUserSkill = (id) =>
-        getToken().then((token) =>
+    const deleteUserSkill = (id) => {
+        return getToken().then((token) =>
             fetch(`/api/userSkill/delete/${id}`, {
                 method: "DELETE",
                 headers: {
@@ -67,6 +67,7 @@ export const UserSkillProvider = (props) => {
                 }
             })
                 .then(getAllUserSkills()))
+    }
 
 
 

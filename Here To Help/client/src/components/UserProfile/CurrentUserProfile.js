@@ -4,19 +4,18 @@ import { UserProfileContext } from "../../providers/UserProfileProvider"
 import { UserSkillContext } from "../../providers/UserSkillProvider"
 import { SkillContext } from "../../providers/SkillProvider"
 import { UserSkill } from "../UserSkill/UserSkill"
-import { Button } from "reactstrap"
+import { Button, Col } from "reactstrap"
 import { PostContext } from "../../providers/PostProvider"
 import { Post } from "../Post/Post"
 
 export const CurrentUserProfileDetails = () => {
 
     const { userProfiles, getUserProfileById } = useContext(UserProfileContext)
-    const { posts, getPosts } = useContext(PostContext);
+    const { posts, getPosts, getPostsByUserSkill } = useContext(PostContext);
     const { userSkills, getUserSkillsByUserId, getAllUserSkills } = useContext(UserSkillContext)
 
 
     const [userProfile, setUserProfile] = useState({ userProfile: {} })
-    const [post, setPosts] = useState({})
 
 
 
@@ -29,23 +28,20 @@ export const CurrentUserProfileDetails = () => {
                 setUserProfile(response)
             })
             .then(getUserSkillsByUserId(userProfileId.id))
-            .then(getPosts)
+            .then(getPostsByUserSkill(userProfileId.id))
+        console.log(posts)
+
     }, [])
 
     useEffect(() => {
         getAllUserSkills()
-            .then(getPosts())
     }, [])
+
+
+
 
     const CurrentUserSkills = userSkills.filter(s => s.userProfileId === userProfileId.id)
     const date = new Date(userProfile.dateCreated).toLocaleString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' })
-    const currentUserSkillSkillIds = CurrentUserSkills.map(s => {
-        return s.SkillId
-    })
-    const profilePosts = posts.map(p => {
-        return CurrentUserSkills.find(s => s.SkillId === p.SkillId)
-    })
-    console.log(profilePosts)
 
     return (
 
@@ -88,9 +84,19 @@ export const CurrentUserProfileDetails = () => {
             </article>
             <section className="NewPosts">
                 <h1 className="News_header">New Posts for {userProfileId.userName}</h1>
-                <div>
-
-                </div>
+                <Col>
+                    {posts.map((post) => (
+                        <div className="post-card" key={post.id}>
+                            <Link to={`/post/GetById/${post.id}`}>
+                                <h3 className="posts-title">
+                                    {post.title}
+                                </h3>
+                            </Link>
+                            <p className="posts--category">{post.skill?.name}</p>
+                            <p className="posts--author">Added by: {post.userProfile?.userName}</p>
+                        </div>
+                    ))}
+                </Col>
             </section>
         </article>
 

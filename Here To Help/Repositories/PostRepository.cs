@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using Here_To_Help.Models;
 using Here_To_Help.Utils;
+using System;
 
 namespace Here_To_Help.Repositories
 {
@@ -60,16 +61,18 @@ namespace Here_To_Help.Repositories
             }
         }
 
-        public List<Post> GetPostsByUserSkills(int id)
+        public List<Post> GetPostsByUserSkills(int Id)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT p.Id, p.Title, p.Url, p.Content, p.SkillId, p.UserProfileId, us.Id as USkillId, us.SkillId as USkillId, us.UserProfileId as UPId
-                        FROM Post p JOIN UserSkill us ON p.UserProfileId = us.UserProfileId
-                            WHERE p.Id = @Id";
+                    cmd.CommandText = @"SELECT p.Id, p.Title, p.Url, p.Content, p.SkillId, p.UserProfileId, p.DateCreated, us.Id as USkillId, us.SkillId as UserSkillSkillId, us.UserProfileId as UPId, s.Id as IdSkill, s.[Name] as NameSkill, up.Id As UpId, up.UserName as UpUserName
+        FROM Post p JOIN Skill s ON p.SkillId = s.Id JOIN UserSkill us ON s.Id = us.SkillId JOIN UserProfile up ON up.Id = us.UserProfileId
+                            WHERE us.IsKnown = 0 AND p.SkillId = us.SkillId AND us.UserProfileId = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", Id);
 
                     Post post = null;
                     var reader = cmd.ExecuteReader();
@@ -86,6 +89,22 @@ namespace Here_To_Help.Repositories
                             UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                             SkillId = reader.GetInt32(reader.GetOrdinal("SkillId")),
                             DateCreated = reader.GetDateTime(reader.GetOrdinal("DateCreated")),
+                            UserSkill = new UserSkill()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("USkillId")),
+                                SkillId = reader.GetInt32(reader.GetOrdinal("UserSkillSkillId")),
+                                UserProfileId = reader.GetInt32(reader.GetOrdinal("UPId"))
+                            },
+                            Skill = new Skill()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("IdSkill")),
+                                Name = reader.GetString(reader.GetOrdinal("NameSkill"))
+                            },
+                            UserProfile = new UserProfile()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("UpId")),
+                                UserName = reader.GetString(reader.GetOrdinal("UpUserName"))
+                            }
                         };
                         posts.Add(post);
                     }
@@ -177,8 +196,9 @@ namespace Here_To_Help.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "DELETE FROM Post WHERE Id = @Id";
+                    cmd.CommandText = "UPDATE SET DateDeleted = @DateDeleted FROM Post WHERE Id = @Id";
                     DbUtils.AddParameter(cmd, "@id", PostId);
+                    DbUtils.AddParameter(cmd, "@DateDeleted", DateTime.Now);
                     cmd.ExecuteNonQuery();
                 }
             }

@@ -39,6 +39,16 @@ namespace Here_To_Help.Controllers
         }
 
         [HttpGet("getByUserSkill/{id}")]
+        public IActionResult GetByUserSill(int id)
+        {
+            var up = _postRepository.GetPostsByUserSkills(id);
+            if (up == null)
+            {
+                return NotFound();
+            }
+            return Ok(up);
+        }
+
 
         [HttpPost]
         public IActionResult Post(Post Post)

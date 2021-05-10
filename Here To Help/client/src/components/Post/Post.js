@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 
 
-export const Post = ({ post }) => {
+export const Post = (post) => {
 
     return (
         <section className="post">
