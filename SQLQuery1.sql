@@ -1,4 +1,4 @@
-﻿ SELECT * FROM PostComment
+﻿ SELECT * FROM QuestionComment
 
  SELECT * FROM Post
 

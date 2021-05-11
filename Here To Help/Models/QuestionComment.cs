@@ -10,5 +10,6 @@ namespace Here_To_Help.Models
         public string Content { get; set; }
         public DateTime DateCreated { get; set; }
         public UserProfile UserProfile { get; set; }
+        public Question Question { get; set; }
     }
 }
