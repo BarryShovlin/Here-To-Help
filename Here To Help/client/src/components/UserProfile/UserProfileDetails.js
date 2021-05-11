@@ -60,9 +60,14 @@ export const UserProfileDetails = () => {
             <div className="userProfileQuestions">
                 <h3>View Their Project Questions</h3>
                 {questions.map(q => {
-                    return <Button onClick={() => history.push(`/Question/GetById/${q.id}`)}>
-                        {q.title}
-                    </Button>
+                    //return <Button onClick={() => history.push(`/Question/GetById/${q.id}`)}>
+                    //     {q.title}
+                    // </Button>
+
+                    return <ul>
+                        <li><Link to={`/Question/GetById/${q.id}`}>{q.title}</Link></li>
+                    </ul>
+
                 })}
             </div>
 

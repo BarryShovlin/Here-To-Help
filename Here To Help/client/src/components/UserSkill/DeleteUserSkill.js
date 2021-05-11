@@ -22,7 +22,7 @@ export const DeleteUserSkill = () => {
     const currentUser = JSON.parse(sessionStorage.getItem("userProfile"))
     console.log(currentUser)
     const handleUserSkillDelete = () => {
-        deleteUserSkill(userSkillId)
+        deleteUserSkill(userSkill.id)
             .then(getAllUserSkills())
             .then(history.push("/"))
     }
