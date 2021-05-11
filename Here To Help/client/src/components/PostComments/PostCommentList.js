@@ -3,7 +3,7 @@ import { PostCommentContext } from "../../providers/PostCommentProvider";
 import { useHistory, useParams } from 'react-router-dom';
 
 
-const PostCommentList = () => {
+export const PostCommentList = () => {
     const history = useHistory();
     const { postId } = useParams();
     const { postComments, getPostCommentsByPostId } = useContext(PostCommentContext);
@@ -12,10 +12,8 @@ const PostCommentList = () => {
         from CommentContext in CommentProvider. If go look at bottom of CommentProvider
          will see the value ={{}} section. Those {} correspond to the {} above
     */
-
-
     useEffect(() => {
-        getAllCommentsByPostId(postId)
+        getPostCommentsByPostId(postId)
     }, []);
 
 
@@ -24,16 +22,15 @@ const PostCommentList = () => {
             <div>
                 {postComments.map((comment) => (
                     <div key={comment.id}>
-                        <div>Subject: {comment.subject}</div>
-                        <div>Content: {comment.content}</div>
-                        <div>User: {comment.userProfile.displayName}</div>
-                        <div>Date Created: {comment.createDateTime}</div>
+                        <div>Comment: {comment.content}</div>
+                        <div>By: {comment.userProfile?.userName}</div>
+                        <div>Date Created: {comment.dateCreated.toLocaleString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' })} </div>
                         <button onClick={() => {
-                            history.push(`/comment/${comment.id}/edit`)
+                            history.push(`/PostComment/${comment.id}`)
                         }}>Edit
                         </button>
                         <button onClick={() => {
-                            history.push(`/comment/${comment.id}`)
+                            history.push(`/comment/delete/${comment.id}`)
                         }}>Delete
                         </button>
                     </div>
@@ -47,4 +44,4 @@ const PostCommentList = () => {
     );
 };
 
-export default CommentList;
+export default PostCommentList;

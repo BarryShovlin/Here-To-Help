@@ -15,9 +15,9 @@ export const PostCommentProvider = (props) => {
     */
 
 
-    const getPostCommentsByPostId = (postId) => {
-        return getToken().then((token) =>
-            fetch(`/PostComment/GetByPostId/${postId}`, {
+    const getPostCommentsByPostId = (id) => {
+        getToken().then((token) =>
+            fetch(`/api/PostComment/getByPostId/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`

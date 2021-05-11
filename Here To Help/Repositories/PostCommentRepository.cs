@@ -93,8 +93,8 @@ namespace Here_To_Help.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                          SELECT PostComment.Id AS PostCommentId, PostComment.UserProfileId AS UserProfileId, PostComment.PostId, PostComment.Content, PostComment.DateCreated, Post.Id AS IdPost, Post.Title As TitlePost, Post.Url AS UrlPost, Post.Content AS ContentPost, Post.UserProfileId AS PostUser, Post.SkillId AS IdSkill
-                          FROM PostComment Join Post ON PostComment.PostId = Post.Id
+                          SELECT PostComment.Id AS PostCommentId, PostComment.UserProfileId AS UserProfileId, PostComment.PostId, PostComment.Content, PostComment.DateCreated, Post.Id AS IdPost, Post.Title As TitlePost, Post.Url AS UrlPost, Post.Content AS ContentPost, Post.UserProfileId AS PostUser, Post.SkillId AS IdSkill, up.Id AS UPId, up.UserName as UPUserName
+                          FROM PostComment Join Post ON PostComment.PostId = Post.Id JOIN UserProfile up ON PostComment.UserProfileId = up.Id
                                
                          WHERE Post.Id = @Id";
 
@@ -108,7 +108,7 @@ namespace Here_To_Help.Repositories
                     {
                         postComment = new PostComment()
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Id = reader.GetInt32(reader.GetOrdinal("PostCommentId")),
                             UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                             PostId = reader.GetInt32(reader.GetOrdinal("PostId")),
                             Content = reader.GetString(reader.GetOrdinal("Content")),
@@ -120,6 +120,11 @@ namespace Here_To_Help.Repositories
                                 Content = reader.GetString(reader.GetOrdinal("ContentPost")),
                                 UserProfileId = reader.GetInt32(reader.GetOrdinal("PostUser")),
                                 SkillId = reader.GetInt32(reader.GetOrdinal("IdSkill")),
+                            },
+                            UserProfile = new UserProfile()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("UPId")),
+                                UserName = reader.GetString(reader.GetOrdinal("UPUserName"))
                             },
                             DateCreated = reader.GetDateTime(reader.GetOrdinal("DateCreated"))
 

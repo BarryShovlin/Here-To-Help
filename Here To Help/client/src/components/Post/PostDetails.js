@@ -40,7 +40,7 @@ export const PostDetails = () => {
                 </div>
             </div>
             <Button color="secondary" size="sm" onClick={() => {
-                history.push(`/comments/${postId}`)
+                history.push(`/PostComment/getByPostId/${postId}`)
             }}>View Comments</Button>
             <Button color="secondary" size="sm" onClick={() => {
                 history.push(`/comment/${postId}/create`)

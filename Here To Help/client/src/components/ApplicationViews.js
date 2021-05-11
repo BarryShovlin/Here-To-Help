@@ -28,7 +28,8 @@ import { AddQuestionForm } from "./Question/AddQuestion"
 import UserSkillSelect from "./UserSkill/UserSkillSelect";
 import DeleteUserSkill from "./UserSkill/DeleteUserSkill";
 import { OtherUserQuestionList } from "./Question/OtherUserQuestionList"
-
+import { PostCommentProvider } from "../providers/PostCommentProvider"
+import { PostCommentList } from "./PostComments/PostCommentList"
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
 
@@ -82,24 +83,28 @@ export default function ApplicationViews() {
 
             <PostProvider>
                 <SkillProvider>
-                    <Route exact path="/Post">
-                        {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
-                    </Route>
+                    <PostCommentProvider>
+                        <Route exact path="/Post">
+                            {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
+                        </Route>
 
-                    <Route exact path="/Post/GetById/:postId(\d+)">
-                        <PostDetails />
-                    </Route>
-                    <Route exact path="/Post/:postId(\d+)">
-                        {isLoggedIn ? <EditPost /> : <Redirect to="/login" />}
-                    </Route>
+                        <Route exact path="/Post/GetById/:postId(\d+)">
+                            <PostDetails />
+                        </Route>
+                        <Route exact path="/Post/:postId(\d+)">
+                            {isLoggedIn ? <EditPost /> : <Redirect to="/login" />}
+                        </Route>
 
-                    <Route exact path="/Posts/NewPost">
-                        <AddPostForm />
-                    </Route>
-                    <Route exact path="/post/delete/:postId(\d+)">
-                        {isLoggedIn ? <DeletePost /> : <Redirect to="/login" />}
-                    </Route>
-
+                        <Route exact path="/Posts/NewPost">
+                            <AddPostForm />
+                        </Route>
+                        <Route exact path="/post/delete/:postId(\d+)">
+                            {isLoggedIn ? <DeletePost /> : <Redirect to="/login" />}
+                        </Route>
+                        <Route exact path="/PostComment/getByPostId/:postId(\d+)">
+                            {isLoggedIn ? <PostCommentList /> : <Redirect to="/login" />}
+                        </Route>
+                    </PostCommentProvider>
                 </SkillProvider>
             </PostProvider>
 

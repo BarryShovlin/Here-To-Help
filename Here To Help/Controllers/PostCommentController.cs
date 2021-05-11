@@ -6,7 +6,7 @@ using Here_To_Help.Repositories;
 
 namespace Here_To_Help.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 
@@ -30,12 +30,8 @@ namespace Here_To_Help.Controllers
         [HttpGet("getByPostId/{id}")]
         public IActionResult Get(int id)
         {
-            var pc = _postCommentRepository.GetPostCommentsByPostId(id);
-            if (pc == null)
-            {
-                return NotFound();
-            }
-            return Ok(pc);
+            return Ok(_postCommentRepository.GetPostCommentsByPostId(id));
+          
         }
 
         [HttpGet("getById/{id}")]
