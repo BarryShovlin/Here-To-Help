@@ -36,6 +36,8 @@ namespace Here_To_Help
             services.AddTransient<IQuestionRepository, QuestionRepository>();
             services.AddTransient<IPostRepository, PostRepository>();
             services.AddTransient<IPostCommentRepository, PostCommentRepository>();
+            services.AddTransient<IQuestionCommentRepository, QuestionCommentRepository>();
+
 
 
 

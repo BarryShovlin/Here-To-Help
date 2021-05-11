@@ -1,7 +1,5 @@
 ﻿ SELECT * FROM QuestionComment
 
- SELECT * FROM Post
-
- UPDATE PostComment
- SET UserProfileId = 1
- WHERE PostComment.Id = 2
+UPDATE QuestionComment
+SET Content = 'This is a test comment'
+WHERE QuestionComment.Id = 2

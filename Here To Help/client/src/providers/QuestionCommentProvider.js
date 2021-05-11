@@ -9,9 +9,9 @@ export const QuestionCommentProvider = (props) => {
     const [questionComments, setQuestionComments] = useState([]);
 
 
-    const getQuestionCommentsByQuestionId = (id) => {
+    const getQuestionCommentsByQuestionId = (questionId) => {
         getToken().then((token) =>
-            fetch(`/api/QuestionComment/getByPostId/${id}`, {
+            fetch(`/api/QuestionComment/getByQuestionId/${questionId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -43,7 +43,7 @@ export const QuestionCommentProvider = (props) => {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(postComment),
+                body: JSON.stringify(questionComment),
             })
         )
     };
@@ -67,9 +67,9 @@ export const QuestionCommentProvider = (props) => {
 
 
 
-    const deleteQuestionComment = (queCommentId) => {
+    const deleteQuestionComment = (questionId) => {
         return getToken().then((token) =>
-            fetch(`/api/PostComment/delete/${queCommentId}`, {
+            fetch(`/api/QuestionComment/delete/${questionId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`

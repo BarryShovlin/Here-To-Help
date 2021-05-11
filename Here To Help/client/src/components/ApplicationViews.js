@@ -32,6 +32,11 @@ import { PostCommentProvider } from "../providers/PostCommentProvider"
 import { PostCommentList } from "./PostComments/PostCommentList"
 import { PostCommentForm } from "./PostComments/PostCommentForm"
 import PostCommentDeleteForm from "./PostComments/PostCommentDelete";
+import { QuestionCommentProvider } from "../providers/QuestionCommentProvider"
+import { QuestionCommentList } from "./QuestionComments/QuestionCommentList"
+import { QuestionCommentForm } from "./QuestionComments/QuestionCommentForm"
+import { QuestionCommentDeleteForm } from "./QuestionComments/QuestionCommentDelete"
+
 
 
 export default function ApplicationViews() {
@@ -112,7 +117,7 @@ export default function ApplicationViews() {
                             {isLoggedIn ? <PostCommentForm /> : <Redirect to="/login" />}
                         </Route>
                         <Route exact path="/PostComment/delete/:postCommentId(\d+)">
-                            { isLoggedIn ? <PostCommentDeleteForm /> : <Redirect to="/login" />}
+                            {isLoggedIn ? <PostCommentDeleteForm /> : <Redirect to="/login" />}
                         </Route>
                     </PostCommentProvider>
                 </SkillProvider>
@@ -121,24 +126,35 @@ export default function ApplicationViews() {
 
             <QuestionProvider>
                 <SkillProvider>
-                    <Route exact path="/Question">
-                        {isLoggedIn ? <QuestionList /> : <Redirect to="/login" />}
-                    </Route>
-                    <Route exact path="/Question/getById/:questionId(\d+)">
-                        {isLoggedIn ? <QuestionDetails /> : <Redirect to="login" />}
-                    </Route>
-                    <Route exact path="/Question/getByUserId/:questionId(\d+)">
-                        {isLoggedIn ? <UserQuestionList /> : <Redirect to="/login" />}
-                    </Route>
-                    <Route exact path="/Question/:questionId(\d+)">
-                        {isLoggedIn ? <EditQuestion /> : <Redirect to="/login" />}
-                    </Route>
-                    <Route exact path="/Question/delete/:questionId(\d+)">
-                        {isLoggedIn ? <DeleteQuestion /> : <Redirect to="/login" />}
-                    </Route>
-                    <Route exact path="/Question/new">
-                        {isLoggedIn ? <AddQuestionForm /> : <Redirect to="/" />}
-                    </Route>
+                    <QuestionCommentProvider>
+                        <Route exact path="/Question">
+                            {isLoggedIn ? <QuestionList /> : <Redirect to="/login" />}
+                        </Route>
+                        <Route exact path="/Question/getById/:questionId(\d+)">
+                            {isLoggedIn ? <QuestionDetails /> : <Redirect to="login" />}
+                        </Route>
+                        <Route exact path="/Question/getByUserId/:questionId(\d+)">
+                            {isLoggedIn ? <UserQuestionList /> : <Redirect to="/login" />}
+                        </Route>
+                        <Route exact path="/Question/:questionId(\d+)">
+                            {isLoggedIn ? <EditQuestion /> : <Redirect to="/login" />}
+                        </Route>
+                        <Route exact path="/Question/delete/:questionId(\d+)">
+                            {isLoggedIn ? <DeleteQuestion /> : <Redirect to="/login" />}
+                        </Route>
+                        <Route exact path="/Question/new">
+                            {isLoggedIn ? <AddQuestionForm /> : <Redirect to="/" />}
+                        </Route>
+                        <Route exact path="/QuestionComment/getByQuestionId/:questionId(\d+)">
+                            {isLoggedIn ? <QuestionCommentList /> : <Redirect to="/login" />}
+                        </Route>
+                        <Route exact path="/QuestionComment/create/:questionId(\d+)">
+                            {isLoggedIn ? <QuestionCommentForm /> : <Redirect to="/login" />}
+                        </Route>
+                        <Route exact path="/QuestionComment/delete/:questionCommentId(\d+)">
+                            {isLoggedIn ? <QuestionCommentDeleteForm /> : <Redirect to="/login" />}
+                        </Route>
+                    </QuestionCommentProvider>
                 </SkillProvider>
             </QuestionProvider>
 
