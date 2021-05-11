@@ -46,11 +46,12 @@ namespace Here_To_Help.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("create/{id}")]
         public IActionResult Post(PostComment PostComment)
         {
+            PostComment.DateCreated = DateTime.Now;
             _postCommentRepository.Add(PostComment);
-            return CreatedAtAction("Details", new { id = PostComment.Id }, PostComment);
+            return CreatedAtAction("Get", new { id = PostComment.Id }, PostComment);
         }
 
         [HttpDelete("delete/{id}")]

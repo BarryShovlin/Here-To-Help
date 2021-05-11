@@ -43,7 +43,7 @@ export const PostDetails = () => {
                 history.push(`/PostComment/getByPostId/${postId}`)
             }}>View Comments</Button>
             <Button color="secondary" size="sm" onClick={() => {
-                history.push(`/comment/${postId}/create`)
+                history.push(`/PostComment/create/${post.id}`)
             }}>Add A Comment</Button>
             <Button class="deleteBtn" color="secondary" size="sm" onClick={() => {
                 if (currentUser.id === post.userProfileId) {

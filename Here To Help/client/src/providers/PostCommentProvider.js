@@ -30,7 +30,7 @@ export const PostCommentProvider = (props) => {
 
     const getPostCommentById = (postCommentId) => {
         return getToken().then((token) =>
-            fetch(`/postComment/${postCommentId}`, {
+            fetch(`/api/postComment/getById/${postCommentId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -43,7 +43,7 @@ export const PostCommentProvider = (props) => {
 
     const addPostComment = (postComment) => {
         return getToken().then((token) =>
-            fetch("/postComment", {
+            fetch(`/api/PostComment/create/${postComment.postId}`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -58,7 +58,7 @@ export const PostCommentProvider = (props) => {
 
     const editPostComment = (postComment) => {
         return getToken().then((token) =>
-            fetch(`/PostComment/${postComment.id}/edit`, {
+            fetch(`api/PostComment/${postComment.id}/edit`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -75,7 +75,7 @@ export const PostCommentProvider = (props) => {
 
     const deletePostComment = (postCommentId) => {
         return getToken().then((token) =>
-            fetch(`/PostComment/delete/${postCommentId}`, {
+            fetch(`/api/PostComment/delete/${postCommentId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`

@@ -1,7 +1,7 @@
-﻿INSERT INTO UserSkill (SkillId, UserProfileId, IsKnown)
-                                        OUTPUT INSERTED.ID
-                                        VALUES (5, 1, 0)
+﻿ SELECT * FROM PostComment
 
+ SELECT * FROM Post
 
-
-SELECT * FROM QuestionComment
+ UPDATE PostComment
+ SET UserProfileId = 1
+ WHERE PostComment.Id = 2

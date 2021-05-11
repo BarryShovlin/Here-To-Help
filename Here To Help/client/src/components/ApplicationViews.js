@@ -30,6 +30,10 @@ import DeleteUserSkill from "./UserSkill/DeleteUserSkill";
 import { OtherUserQuestionList } from "./Question/OtherUserQuestionList"
 import { PostCommentProvider } from "../providers/PostCommentProvider"
 import { PostCommentList } from "./PostComments/PostCommentList"
+import { PostCommentForm } from "./PostComments/PostCommentForm"
+import PostCommentDeleteForm from "./PostComments/PostCommentDelete";
+
+
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
 
@@ -103,6 +107,12 @@ export default function ApplicationViews() {
                         </Route>
                         <Route exact path="/PostComment/getByPostId/:postId(\d+)">
                             {isLoggedIn ? <PostCommentList /> : <Redirect to="/login" />}
+                        </Route>
+                        <Route exact path="/PostComment/create/:postId(\d+)">
+                            {isLoggedIn ? <PostCommentForm /> : <Redirect to="/login" />}
+                        </Route>
+                        <Route exact path="/PostComment/delete/:postCommentId(\d+)">
+                            { isLoggedIn ? <PostCommentDeleteForm /> : <Redirect to="/login" />}
                         </Route>
                     </PostCommentProvider>
                 </SkillProvider>
