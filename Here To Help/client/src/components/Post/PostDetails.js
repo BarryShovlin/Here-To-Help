@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PostContext } from "../../providers/PostProvider";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import { Button, Row } from "reactstrap";
 import "./Posts.css"
 
@@ -13,8 +13,6 @@ export const PostDetails = () => {
     const history = useHistory();
     const [post, setPost] = useState({})
 
-    console.log(posts[0]?.imageLocation)
-
     useEffect(() => {
         getPostById(postId)
             .then((res) => {
@@ -22,6 +20,9 @@ export const PostDetails = () => {
             })
     }, []);
     const currentUser = JSON.parse(sessionStorage.getItem("userProfile"))
+
+    const date = new Date(post.dateCreated).toLocaleString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' })
+
 
 
 
@@ -32,10 +33,10 @@ export const PostDetails = () => {
                     <h1 className="posts-title">
                         {post.title}
                     </h1>
-                    <p className="post-details">Published on {post.DateCreated}</p>
+                    <p className="post-details">Published on {date}</p>
                     <p className="post-details">Published by {post.userProfile?.userName}</p>
-                    <img src={post.Url} alt="No image available"></img>
                     <p className="postContent">{post.content}</p>
+                    <a target="_blank" href={`${post.url}`}>Check Out The Link</a>
                 </div>
             </div>
             <Button color="secondary" size="sm" onClick={() => {
@@ -53,6 +54,16 @@ export const PostDetails = () => {
             }
             }> Delete This Post
             </Button>
+            <Button class="editBtn" color="secondary" size="sm" onClick={() => {
+                if (currentUser.id === post.userProfileId) {
+                    history.push(`/Post/${post.id}`)
+                } else {
+                    window.alert("You may only make edits to posts you have created")
+                }
+            }
+            }> Edit This Post
+            </Button>
+
         </>
     );
 };

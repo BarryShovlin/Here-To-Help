@@ -17,6 +17,7 @@ import { PostDetails } from "./Post/PostDetails"
 import { AddPostForm } from "./Post/AddPost"
 import { DeletePost } from "./Post/DeletePost"
 import { PostProvider } from "../providers/PostProvider";
+import { EditPost } from "./Post/EditPost"
 import { QuestionProvider } from "../providers/QuestionProvider"
 import { QuestionList } from "../components/Question/QuestionList"
 import { QuestionDetails } from "../components/Question/QuestionDetails"
@@ -87,6 +88,9 @@ export default function ApplicationViews() {
 
                     <Route exact path="/Post/GetById/:postId(\d+)">
                         <PostDetails />
+                    </Route>
+                    <Route exact path="/Post/:postId(\d+)">
+                        {isLoggedIn ? <EditPost /> : <Redirect to="/login" />}
                     </Route>
 
                     <Route exact path="/Posts/NewPost">
