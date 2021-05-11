@@ -6,19 +6,17 @@ import "./Question.css"
 
 
 export const QuestionDetails = () => {
-    const { questions, getQuestionById } = useContext(QuestionContext);
+    const { questions, getAllQuestions, getQuestionById } = useContext(QuestionContext);
+    const [question, setQuestions] = useState({})
 
 
     let { questionId } = useParams()
-    const [question, setQuestion] = useState({})
 
 
 
     useEffect(() => {
         getQuestionById(questionId)
-            .then((res) => {
-                setQuestion(res)
-            })
+            .then((res) => setQuestions(res))
     }, []);
 
     console.log(question)

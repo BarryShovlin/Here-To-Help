@@ -26,7 +26,7 @@ export const QuestionProvider = (props) => {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
-            }).then((res) => res.json()))
+            }).then(res => res.json()))
 
     const getQuestionsByUserId = (id) =>
         getToken().then((token) =>
@@ -35,7 +35,10 @@ export const QuestionProvider = (props) => {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
-            }).then((res) => res.json()))
+            }).then(res => res.json())
+                .then(setQuestions));
+
+
 
 
 

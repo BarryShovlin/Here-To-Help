@@ -26,6 +26,7 @@ import { DeleteQuestion } from "./Question/DeleteQuestion"
 import { AddQuestionForm } from "./Question/AddQuestion"
 import UserSkillSelect from "./UserSkill/UserSkillSelect";
 import DeleteUserSkill from "./UserSkill/DeleteUserSkill";
+import { OtherUserQuestionList } from "./Question/OtherUserQuestionList"
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -54,9 +55,11 @@ export default function ApplicationViews() {
                         <UserProfileList />
                     </Route>
                     <UserSkillProvider>
-                        <Route exact path="/userProfile/detail/getById/:userProfileId(\d+)">
-                            <UserProfileDetails />
-                        </Route>
+                        <QuestionProvider>
+                            <Route exact path="/userProfile/detail/getById/:userProfileId(\d+)">
+                                <UserProfileDetails />
+                            </Route>
+                        </QuestionProvider>
                     </UserSkillProvider>
                 </UserProfileProvider>
 
@@ -103,7 +106,7 @@ export default function ApplicationViews() {
                         {isLoggedIn ? <QuestionList /> : <Redirect to="/login" />}
                     </Route>
                     <Route exact path="/Question/getById/:questionId(\d+)">
-                        <QuestionDetails />
+                        {isLoggedIn ? <QuestionDetails /> : <Redirect to="login" />}
                     </Route>
                     <Route exact path="/Question/getByUserId/:questionId(\d+)">
                         {isLoggedIn ? <UserQuestionList /> : <Redirect to="/login" />}
