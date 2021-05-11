@@ -39,6 +39,7 @@ export const EditPost = () => {
             userProfileId: post.userProfileId,
             skillId: post.skillId
         })
+            .then(getPostById(post.id))
     };
 
     return (

@@ -15,16 +15,16 @@ export const PostCommentProvider = (props) => {
     */
 
 
-    const getAllPostCommentsByPostId = (postId) => {
+    const getPostCommentsByPostId = (postId) => {
         return getToken().then((token) =>
-            fetch(`/comments/${postId}`, {
+            fetch(`/PostComment/GetByPostId/${postId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
                 .then((res) => res.json())
-                .then(setComments));
+                .then(setPostComments));
     };
 
 
@@ -43,7 +43,7 @@ export const PostCommentProvider = (props) => {
 
     const addPostComment = (postComment) => {
         return getToken().then((token) =>
-            fetch(`/postComment/${postComment.postId}/create`, {
+            fetch("/postComment", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -58,7 +58,7 @@ export const PostCommentProvider = (props) => {
 
     const editPostComment = (postComment) => {
         return getToken().then((token) =>
-            fetch(`/comment/${postComment.id}/edit`, {
+            fetch(`/PostComment/${postComment.id}/edit`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -75,7 +75,7 @@ export const PostCommentProvider = (props) => {
 
     const deletePostComment = (postCommentId) => {
         return getToken().then((token) =>
-            fetch(`/comment/delete/${postCommentId}`, {
+            fetch(`/PostComment/delete/${postCommentId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -87,7 +87,7 @@ export const PostCommentProvider = (props) => {
 
     return (
         <PostCommentContext.Provider value={{
-            postComments, getAllPostCommentsByPostId, getPostCommentById,
+            postComments, getPostCommentsByPostId, getPostCommentById,
             addPostComment, editPostComment, deletePostComment
         }}>
             {props.children}

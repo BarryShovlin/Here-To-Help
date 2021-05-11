@@ -109,17 +109,17 @@ namespace Here_To_Help.Repositories
                         postComment = new PostComment()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            UserProfileId = reader.GetInt16(reader.GetOrdinal("UserProfileId")),
-                            PostId = reader.GetInt16(reader.GetOrdinal("PostId")),
+                            UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                            PostId = reader.GetInt32(reader.GetOrdinal("PostId")),
+                            Content = reader.GetString(reader.GetOrdinal("Content")),
                             Post = new Post
                             {
-                                Id = reader.GetInt32(reader.GetOrdinal("IdUser")),
-                                Title = reader.GetString(reader.GetOrdinal("Title")),
-                                Url = reader.GetString(reader.GetOrdinal("Url")),
-                                Content = reader.GetString(reader.GetOrdinal("Content")),
-                                UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
-                                SkillId = reader.GetInt32(reader.GetOrdinal("SkillId")),
-                                DateCreated = reader.GetDateTime(reader.GetOrdinal("UCreate"))
+                                Id = reader.GetInt32(reader.GetOrdinal("IdPost")),
+                                Title = reader.GetString(reader.GetOrdinal("TitlePost")),
+                                Url = reader.GetString(reader.GetOrdinal("UrlPost")),
+                                Content = reader.GetString(reader.GetOrdinal("ContentPost")),
+                                UserProfileId = reader.GetInt32(reader.GetOrdinal("PostUser")),
+                                SkillId = reader.GetInt32(reader.GetOrdinal("IdSkill")),
                             },
                             DateCreated = reader.GetDateTime(reader.GetOrdinal("DateCreated"))
 
@@ -130,6 +130,57 @@ namespace Here_To_Help.Repositories
                     }
                     reader.Close();
                     return postComments;
+                }
+            }
+        }
+
+        public PostComment GetPostCommentById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                         SELECT PostComment.Id AS PostCommentId, PostComment.UserProfileId AS UserProfileId, PostComment.PostId, PostComment.Content, PostComment.DateCreated, Post.Id AS IdPost, Post.Title As TitlePost, Post.Url AS UrlPost, Post.Content AS ContentPost, Post.UserProfileId AS PostUser, Post.SkillId AS IdSkill, up.Id as UPId, up.UserName as UPUserName
+                          FROM PostComment Join Post ON PostComment.PostId = Post.Id JOIN UserProfile up ON up.Id = PostComment.UserProfileId
+                          WHERE PostComment.Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", id);
+
+                    PostComment postComment = null;
+
+                    var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        postComment = new PostComment()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("PostCommentId")),
+                            UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                            PostId = reader.GetInt32(reader.GetOrdinal("PostId")),
+                            Content = reader.GetString(reader.GetOrdinal("Content")),
+                            DateCreated = reader.GetDateTime(reader.GetOrdinal("DateCreated")),
+                            Post = new Post
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("IdPost")),
+                                Title = reader.GetString(reader.GetOrdinal("TitlePost")),
+                                Url = reader.GetString(reader.GetOrdinal("UrlPost")),
+                                Content = reader.GetString(reader.GetOrdinal("Content")),
+                                UserProfileId = reader.GetInt32(reader.GetOrdinal("PostUser")),
+                                SkillId = reader.GetInt32(reader.GetOrdinal("IdSkill")),
+                            },
+                            UserProfile = new UserProfile()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("UPId")),
+                                UserName = reader.GetString(reader.GetOrdinal("UPUserName"))
+                            }
+
+
+                        };
+
+                    }
+                    reader.Close();
+                    return postComment;
                 }
             }
         }

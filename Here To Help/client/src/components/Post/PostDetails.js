@@ -42,7 +42,7 @@ export const PostDetails = () => {
             <Button color="secondary" size="sm" onClick={() => {
                 history.push(`/comments/${postId}`)
             }}>View Comments</Button>
-            <Button onClick={() => {
+            <Button color="secondary" size="sm" onClick={() => {
                 history.push(`/comment/${postId}/create`)
             }}>Add A Comment</Button>
             <Button class="deleteBtn" color="secondary" size="sm" onClick={() => {
