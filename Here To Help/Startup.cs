@@ -37,6 +37,8 @@ namespace Here_To_Help
             services.AddTransient<IPostRepository, PostRepository>();
             services.AddTransient<IPostCommentRepository, PostCommentRepository>();
             services.AddTransient<IQuestionCommentRepository, QuestionCommentRepository>();
+            services.AddTransient<ISkillTagRepository, SkillTagRepository>();
+
 
 
 
