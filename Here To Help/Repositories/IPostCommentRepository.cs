@@ -10,5 +10,6 @@ namespace Here_To_Help.Repositories
         List<PostComment> GetAllPostComments();
         List<PostComment> GetPostCommentsByPostId(int PostId);
         void Update(PostComment postComment);
+        PostComment GetPostCommentById(int id);
     }
 }

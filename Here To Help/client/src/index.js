@@ -4,7 +4,8 @@ import * as serviceWorker from './serviceWorker';
 import firebase from "firebase/app";
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,

@@ -7,7 +7,8 @@ namespace Here_To_Help.Repositories
     {
         void Add(UserSkill userSkill);
         List<UserSkill> GetAllUserSkills();
-        UserSkill GetUserSkillById(int id);
+        List<UserSkill> GetUserSkillByUserId(int id);
         void Delete(int UserSKillId);
+        UserSkill GetUserSkillById(int id);
     }
 }

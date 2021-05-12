@@ -10,5 +10,6 @@ namespace Here_To_Help.Repositories
         List<Question> GetAllQuestions();
         Question GetQuestionById(int id);
         void Update(Question que);
+        List<Question> GetQuestionsByUserId(int id);
     }
 }

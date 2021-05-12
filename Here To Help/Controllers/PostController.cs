@@ -38,11 +38,24 @@ namespace Here_To_Help.Controllers
             return Ok(up);
         }
 
+        [HttpGet("getByUserSkill/{id}")]
+        public IActionResult GetByUserSill(int id)
+        {
+            var up = _postRepository.GetPostsByUserSkills(id);
+            if (up == null)
+            {
+                return NotFound();
+            }
+            return Ok(up);
+        }
+
+
         [HttpPost]
         public IActionResult Post(Post Post)
         {
+            Post.DateCreated = DateTime.Now;
             _postRepository.Add(Post);
-            return CreatedAtAction("Details", new { id = Post.Id }, Post);
+            return CreatedAtAction("Get", new { id = Post.Id }, Post);
         }
 
         [HttpDelete("delete/{id}")]

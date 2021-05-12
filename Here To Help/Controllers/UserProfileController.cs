@@ -6,7 +6,7 @@ using Here_To_Help.Repositories;
 
 namespace Here_To_Help.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 
@@ -44,7 +44,7 @@ namespace Here_To_Help.Controllers
 
 
 
-        [HttpGet("getById/{id}")]
+        [HttpGet("detail/getById/{id}")]
         public IActionResult Get(int id)
         {
             var up = _userProfileRepository.GetUserProfileById(id);

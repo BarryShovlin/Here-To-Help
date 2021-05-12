@@ -1,3 +1,5 @@
+using System;
+
 namespace Here_To_Help.Models
 {
     public class QuestionComment
@@ -6,6 +8,8 @@ namespace Here_To_Help.Models
         public int UserProfileId { get; set; }
         public int QuestionId { get; set; }
         public string Content { get; set; }
-        public string DateCreated { get; set; }
+        public DateTime DateCreated { get; set; }
+        public UserProfile UserProfile { get; set; }
+        public Question Question { get; set; }
     }
 }

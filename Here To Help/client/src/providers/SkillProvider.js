@@ -7,7 +7,7 @@ export const SkillContext = React.createContext();
 export const SkillProvider = (props) => {
     const [skills, setSkills] = useState([]);
     const { getToken } = useContext(UserProfileContext);
-    const apiUrl = "/api/Skills";
+    const apiUrl = "/api/Skill";
 
     const getAllSkills = () =>
         getToken().then((token) =>

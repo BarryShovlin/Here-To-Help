@@ -28,9 +28,16 @@ namespace Here_To_Help.Controllers
 
 
         [HttpGet("getByPostId/{id}")]
-        public IActionResult Get(int postId)
+        public IActionResult Get(int id)
         {
-            var pc = _postCommentRepository.GetPostCommentsByPostId(postId);
+            return Ok(_postCommentRepository.GetPostCommentsByPostId(id));
+          
+        }
+
+        [HttpGet("getById/{id}")]
+        public IActionResult GetById(int id)
+        {
+            var pc = _postCommentRepository.GetPostCommentById(id);
             if (pc == null)
             {
                 return NotFound();
@@ -38,11 +45,13 @@ namespace Here_To_Help.Controllers
             return Ok(pc);
         }
 
-        [HttpPost]
+
+        [HttpPost("create/{id}")]
         public IActionResult Post(PostComment PostComment)
         {
+            PostComment.DateCreated = DateTime.Now;
             _postCommentRepository.Add(PostComment);
-            return CreatedAtAction("Details", new { id = PostComment.Id }, PostComment);
+            return CreatedAtAction("Get", new { id = PostComment.Id }, PostComment);
         }
 
         [HttpDelete("delete/{id}")]

@@ -10,5 +10,6 @@ namespace Here_To_Help.Repositories
         List<Post> GetAllPosts();
         Post GetPostById(int id);
         void Update(Post post);
+        List<Post> GetPostsByUserSkills(int id);
     }
 }

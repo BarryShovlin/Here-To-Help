@@ -24,7 +24,7 @@ namespace Here_To_Help.Controllers
         public IActionResult Post(UserSkill userSkill)
         {
             _userSkillRepository.Add(userSkill);
-            return CreatedAtAction("Details", new { id = userSkill.Id }, userSkill);
+            return Ok(userSkill.Id);
         }
 
 
@@ -36,8 +36,19 @@ namespace Here_To_Help.Controllers
 
 
 
-        [HttpGet("getById/{id}")]
+        [HttpGet("getByUserId/{id}")]
         public IActionResult Get(int id)
+        {
+            var us = _userSkillRepository.GetUserSkillByUserId(id);
+            if (us == null)
+            {
+                return NotFound();
+            }
+            return Ok(us);
+        }
+
+        [HttpGet("getById/{id}")]
+        public IActionResult GetById(int id)
         {
             var us = _userSkillRepository.GetUserSkillById(id);
             if (us == null)
