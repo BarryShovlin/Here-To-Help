@@ -227,6 +227,69 @@ namespace Here_To_Help.Repositories
             }
         }
 
+        public List<Post> Search(string criterion, bool sortDescending)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    var sql =
+                        @"SELECT p.Id AS PostId, p.Url, p.Title, p.Content, p.UserProfileId, p.SkillId, p.DateCreated,
+                            up.Id as UserProfileId, up.Name, up.Email, up.UserName, up.DateCreated AS UserProfileDateCreated,
+                            st.Id as TagId, st.Title as TagTitle, st.PostId as TagPost, st.SkillId as TagSkill,
+                            s.Id as IdSkill, s.Name as NameSkill
+                        FROM Post p
+                             JOIN UserProfile up ON p.UserProfileId = up.Id JOIN Skill s ON p.SkillId = s.Id JOIN SkillTag st ON p.SkillId = st.SkillId
+                       
+                    WHERE p.Title LIKE @Criterion OR p.Content LIKE @Criterion OR st.Title LIKE @Criterion";
+
+                    if (sortDescending)
+                    {
+                        sql += " ORDER BY p.DateCreated DESC";
+                    }
+                    else
+                    {
+                        sql += " ORDER BY p.DateCreated";
+                    }
+
+                    cmd.CommandText = sql;
+                    DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");
+                    var reader = cmd.ExecuteReader();
+
+                    var posts = new List<Post>();
+                    while (reader.Read())
+                    {
+                        posts.Add(new Post()
+                        {
+                            Id = DbUtils.GetInt(reader, "PostId"),
+                            Title = DbUtils.GetString(reader, "Title"),
+                            Caption = DbUtils.GetString(reader, "Caption"),
+                            DateCreated = DbUtils.GetDateTime(reader, "PostDateCreated"),
+                            ImageUrl = DbUtils.GetString(reader, "PostImageUrl"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                            UserProfile = new UserProfile()
+                            {
+                                Id = DbUtils.GetInt(reader, "UserProfileId"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                                Email = DbUtils.GetString(reader, "Email"),
+                                DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
+                                ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
+                            },
+                            Comments = new List<Comment>()
+                            {
+                            }
+                        });
+                    }
+
+                    reader.Close();
+
+                    return posts;
+                }
+            }
+        }
+    }
+
 
     }
 }
