@@ -8,11 +8,13 @@ import { SearchPosts } from "./SearchPost"
 
 export const SearchPostList = () => {
     const { posts, getPosts, searchPost } = useContext(PostContext);
-    const criterion = useParams()
+    const { criterion } = useParams()
 
     useEffect(() => {
-        searchPost(criterion);
-    }, []);
+        searchPost(criterion)
+            .then(console.log(criterion))
+    }, [criterion]);
+
 
     return (
         <section>

@@ -110,9 +110,10 @@ export const PostProvider = (props) => {
                 .then(getPostById(post.id)))
 
     const searchPost = (criterion) => {
-        return fetch(`api/post/search?q=${criterion}&sortDesc=false`)
+        return fetch(`api/Post/search?q=${criterion}&sortDesc=false`)
             .then((res) => res.json())
             .then(setPosts)
+            .then(console.log(posts))
     }
 
     return (

@@ -131,7 +131,7 @@ export default function ApplicationViews() {
                             <Route exact path="/SkillTag/delete/:skillTagId(\d+)">
                                 {isLoggedIn ? <SkillTagDeleteForm /> : <Redirect to="/login" />}
                             </Route>
-                            <Route exact path="/post/search?q=:criterion(\d+)&sortDesc=false">
+                            <Route exact path="/Post/search?q=:criterion(\d+)&sortDesc=false">
                                 {isLoggedIn ? <SearchPostList /> : <Redirect to="/login" />}
                             </Route>
                         </PostCommentProvider>
