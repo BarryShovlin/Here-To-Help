@@ -6,7 +6,7 @@ using Here_To_Help.Repositories;
 
 namespace Here_To_Help.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
 
@@ -75,6 +75,12 @@ namespace Here_To_Help.Controllers
 
             _postRepository.Update(que);
             return NoContent();
+        }
+
+        [HttpGet("search")]
+        public IActionResult Search(string q, bool sortDesc)
+        {
+            return Ok(_postRepository.Search(q, sortDesc));
         }
 
     }

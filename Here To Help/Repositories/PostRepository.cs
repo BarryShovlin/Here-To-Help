@@ -19,7 +19,8 @@ namespace Here_To_Help.Repositories
                 {
                     cmd.CommandText = @"
                        SELECT p.id, p.Title, p.Url, p.Content, p.UserProfileId, p.SkillId, p.DateCreated, s.Id AS IdSkill, s.Name AS NameSkill, u.Id as IdUser, u.FirebaseUserId AS FireId, u.Name AS NameUser, u.Email AS EmailUser, u.UserName AS UserName, u.DateCreated AS UCreate
-                         FROM Post p Join Skill s ON p.SkillId = s.Id JOIN UserProfile u ON p.UserProfileId = u.Id";
+                         FROM Post p Join Skill s ON p.SkillId = s.Id JOIN UserProfile u ON p.UserProfileId = u.Id
+                            ORDER BY p.DateCreated DESC";
 
                     Post post = null;
                     var reader = cmd.ExecuteReader();
@@ -70,7 +71,8 @@ namespace Here_To_Help.Repositories
                 {
                     cmd.CommandText = @"SELECT p.Id, p.Title, p.Url, p.Content, p.SkillId, p.UserProfileId, p.DateCreated, us.Id as USkillId, us.SkillId as UserSkillSkillId, us.UserProfileId as UPId, s.Id as IdSkill, s.[Name] as NameSkill, up.Id As UpId, up.UserName as UpUserName
         FROM Post p JOIN Skill s ON p.SkillId = s.Id JOIN UserSkill us ON s.Id = us.SkillId JOIN UserProfile up ON up.Id = us.UserProfileId
-                            WHERE us.IsKnown = 0 AND p.SkillId = us.SkillId AND us.UserProfileId = @Id";
+                            WHERE us.IsKnown = 0 AND p.SkillId = us.SkillId AND us.UserProfileId = @Id
+                            ORDER BY p.DateCreated DESC";
 
                     DbUtils.AddParameter(cmd, "@Id", Id);
 
@@ -264,21 +266,31 @@ namespace Here_To_Help.Repositories
                         {
                             Id = DbUtils.GetInt(reader, "PostId"),
                             Title = DbUtils.GetString(reader, "Title"),
-                            Caption = DbUtils.GetString(reader, "Caption"),
-                            DateCreated = DbUtils.GetDateTime(reader, "PostDateCreated"),
-                            ImageUrl = DbUtils.GetString(reader, "PostImageUrl"),
+                            Url = DbUtils.GetString(reader, "Url"),
+                            Content = DbUtils.GetString(reader, "Content"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                            SkillId = DbUtils.GetInt(reader, "SkillId"),
                             UserProfile = new UserProfile()
                             {
                                 Id = DbUtils.GetInt(reader, "UserProfileId"),
                                 Name = DbUtils.GetString(reader, "Name"),
                                 Email = DbUtils.GetString(reader, "Email"),
-                                DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
-                                ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
+                                UserName = DbUtils.GetString(reader, "UserName"),
+                                DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated")
                             },
-                            Comments = new List<Comment>()
+                            Skill = new Skill()
                             {
-                            }
+                                Id = DbUtils.GetInt(reader, "IdSkill"),
+                                Name = DbUtils.GetString(reader, "NameSkill")
+                            },
+                            SkillTag = new SkillTag()
+                            {
+                                Id = DbUtils.GetInt(reader, "TagId"),
+                                Title = DbUtils.GetString(reader, "TagTitle"),
+                                PostId = DbUtils.GetInt(reader, "TagPost"),
+                                SkillId = DbUtils.GetInt(reader, "TagSkill")
+                            },
+                            DateCreated = DbUtils.GetDateTime(reader, "DateCreated")
                         });
                     }
 
@@ -288,8 +300,5 @@ namespace Here_To_Help.Repositories
                 }
             }
         }
-    }
-
-
     }
 }

@@ -11,6 +11,6 @@ namespace Here_To_Help.Repositories
         Post GetPostById(int id);
         void Update(Post post);
         List<Post> GetPostsByUserSkills(int id);
-        List<Post> SearchPost(int tagId);
+        List<Post> Search(string criterion, bool sortDescending);
     }
 }

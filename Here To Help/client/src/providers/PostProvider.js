@@ -109,8 +109,14 @@ export const PostProvider = (props) => {
             })
                 .then(getPostById(post.id)))
 
+    const searchPost = (criterion) => {
+        return fetch(`api/post/search?q=${criterion}&sortDesc=false`)
+            .then((res) => res.json())
+            .then(setPosts)
+    }
+
     return (
-        <PostContext.Provider value={{ posts, getPosts, getUserPosts, getPostDetails, getPostById, getPostsByUserSkill, addPost, editPost, deletePost }}>
+        <PostContext.Provider value={{ posts, getPosts, getUserPosts, getPostDetails, getPostById, getPostsByUserSkill, addPost, editPost, deletePost, searchPost }}>
             {props.children}
         </PostContext.Provider>
     );

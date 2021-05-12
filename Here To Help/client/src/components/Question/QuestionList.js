@@ -28,6 +28,7 @@ export const QuestionList = () => {
                         </Link>
                         <p className="posts--category">{que.skill.name}</p>
                         <p className="posts--author">Added by: {que.userProfile.userName}</p>
+                        <p className="que_date">Asked on: {que.dateCreated.toLocaleString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' })}</p>
                     </div>
                 ))}
             </Col>

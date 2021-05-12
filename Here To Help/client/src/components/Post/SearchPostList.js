@@ -1,24 +1,24 @@
 import React, { useContext, useEffect } from "react";
 import { PostContext } from "../../providers/PostProvider";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Form, Button, Row, Container, Col } from "reactstrap";
 import "./Posts.css"
 import { SearchPosts } from "./SearchPost"
 
 
-export const PostList = () => {
-    const { posts, getPosts } = useContext(PostContext);
+export const SearchPostList = () => {
+    const { posts, getPosts, searchPost } = useContext(PostContext);
+    const criterion = useParams()
 
     useEffect(() => {
-        getPosts();
+        searchPost(criterion);
     }, []);
 
     return (
         <section>
-            <SearchPosts />
             <div className="posts-container">
                 <Col className="posts-header">
-                    <h1>All Posts</h1>
+                    <h1>Search Results</h1>
                 </Col>
                 <hr></hr>
                 <Col>
@@ -30,7 +30,7 @@ export const PostList = () => {
                                 </h3>
                             </Link>
                             <p className="posts--category">{post.skill.name}</p>
-                            <p className="posts--author">Added by: {post.userProfile.userName}</p>
+                            <p className="posts--author">Added by: {post.userProfile?.userName}</p>
                         </div>
                     ))}
                 </Col>
@@ -39,4 +39,4 @@ export const PostList = () => {
     );
 };
 
-export default PostList;
+export default SearchPostList;

@@ -14,5 +14,6 @@ namespace Here_To_Help.Models
         public Skill Skill { get; set; }
         public UserProfile UserProfile { get; set; }
         public UserSkill UserSkill { get; set; }
+        public SkillTag SkillTag { get; set; }
     }
 }
