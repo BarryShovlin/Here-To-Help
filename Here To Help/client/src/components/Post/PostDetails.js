@@ -8,7 +8,7 @@ import "./Posts.css"
 
 export const PostDetails = () => {
     const { posts, getPostById } = useContext(PostContext);
-    const { skillTags, getSkillTagsByPostId } = useContext(SkillTagContext);
+    const { skillTags, getSkillTagsByPostId, getAllSkillTags } = useContext(SkillTagContext);
 
 
     let { postId } = useParams()
@@ -21,8 +21,8 @@ export const PostDetails = () => {
                 setPost(res)
             })
         getSkillTagsByPostId(postId)
+    })
 
-    }, []);
 
     console.log(skillTags)
     const currentUser = JSON.parse(sessionStorage.getItem("userProfile"))
@@ -44,10 +44,10 @@ export const PostDetails = () => {
                     <p className="postContent">{post.content}</p>
                     <a target="_blank" href={`${post.url}`}>Check Out The Link</a>
                 </div>
-                <div className="skillTags">
+                <div className="skillTags">SkillTags:
                     {skillTags.map((tag) => {
-                        return <p>{tag.title}</p>
-                    })}
+                    return `#${tag.title}  `
+                })}
                 </div>
             </div>
             <Button color="secondary" size="sm" onClick={() => {

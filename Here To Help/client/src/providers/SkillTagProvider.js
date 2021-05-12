@@ -74,3 +74,5 @@ export const SkillTagProvider = (props) => {
         </SkillTagContext.Provider >
     );
 };
+
+export default SkillTagProvider;
