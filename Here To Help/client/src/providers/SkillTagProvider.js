@@ -42,29 +42,29 @@ export const SkillTagProvider = (props) => {
                 .then(setSkillTags));
     };
 
-    const addSkillTag = (tag) => {
+    const addSkillTag = (postId) => {
         return getToken().then((token) =>
-            fetch(`/api/SkillTag/create/${tag.id}`, {
+            fetch(`/api/SkillTag/create/${postId}`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(tag)
+                body: JSON.stringify(postId)
             })
         )
     };
 
 
-    const deleteSkillTag = tagId => {
+    const deleteSkillTag = (SkillTagId) => {
         return getToken().then((token) =>
-            fetch(`/api/SkillTag/delete/${tagId}`, {
+            fetch(`/api/SkillTag/delete/${SkillTagId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             })
-                .then(getAllSkillTags))
+        )
     };
 
 

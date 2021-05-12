@@ -21,10 +21,10 @@ export const PostDetails = () => {
                 setPost(res)
             })
         getSkillTagsByPostId(postId)
-    })
+
+    }, [])
 
 
-    console.log(skillTags)
     const currentUser = JSON.parse(sessionStorage.getItem("userProfile"))
 
     const date = new Date(post.dateCreated).toLocaleString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' })
@@ -46,10 +46,13 @@ export const PostDetails = () => {
                 </div>
                 <div className="skillTags">SkillTags:
                     {skillTags.map((tag) => {
-                    return `#${tag.title}  `
+                    return <Link to={`/SkillTag/delete/${tag.id}`}>#{tag.title},  </Link>
                 })}
                 </div>
             </div>
+            <Button color="secondary" size="sm" onClick={() => {
+                history.push(`/SkillTag/create/${postId}`)
+            }}>Add SkillTag</Button>
             <Button color="secondary" size="sm" onClick={() => {
                 history.push(`/PostComment/getByPostId/${postId}`)
             }}>View Comments</Button>

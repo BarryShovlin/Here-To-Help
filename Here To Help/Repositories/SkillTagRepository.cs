@@ -62,9 +62,9 @@ namespace Here_To_Help.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO SkillTag Title, PostId, SkillId
+                    cmd.CommandText = @"INSERT INTO SkillTag (Title, PostId, SkillId)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@Title, @SkillId)";
+                                        VALUES (@Title, @PostId, @SkillId)";
                     DbUtils.AddParameter(cmd, "@Title", skillTag.Title);
                     DbUtils.AddParameter(cmd, "@PostId", skillTag.PostId);
                     DbUtils.AddParameter(cmd, "@SkillId", skillTag.SkillId);

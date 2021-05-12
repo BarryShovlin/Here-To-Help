@@ -37,6 +37,8 @@ import { QuestionCommentList } from "./QuestionComments/QuestionCommentList"
 import { QuestionCommentForm } from "./QuestionComments/QuestionCommentForm"
 import { QuestionCommentDeleteForm } from "./QuestionComments/QuestionCommentDelete"
 import { SkillTagProvider } from "../providers/SkillTagProvider"
+import { SkillTagForm } from "./SkillTag/AddSkillTag"
+import { SkillTagDeleteForm } from "./SkillTag/DeleteSkillTag"
 
 
 
@@ -121,6 +123,12 @@ export default function ApplicationViews() {
                             </Route>
                             <Route exact path="/PostComment/delete/:postCommentId(\d+)">
                                 {isLoggedIn ? <PostCommentDeleteForm /> : <Redirect to="/login" />}
+                            </Route>
+                            <Route exact path="/SkillTag/create/:postId(\d+)">
+                                {isLoggedIn ? <SkillTagForm /> : <Redirect to="/login" />}
+                            </Route>
+                            <Route exact path="/SkillTag/delete/:skillTagId(\d+)">
+                                {isLoggedIn ? <SkillTagDeleteForm /> : <Redirect to="/login" />}
                             </Route>
                         </PostCommentProvider>
                     </SkillTagProvider>
