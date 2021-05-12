@@ -26,10 +26,6 @@ export const PostCommentList = () => {
                         <div>By: {comment.userProfile?.userName}</div>
                         <div>Date Created: {comment.dateCreated.toLocaleString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' })} </div>
                         <button onClick={() => {
-                            history.push(`/PostComment/${comment.id}`)
-                        }}>Edit
-                        </button>
-                        <button onClick={() => {
                             history.push(`/PostComment/delete/${comment.id}`)
                         }}>Delete
                         </button>
