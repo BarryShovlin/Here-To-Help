@@ -6,7 +6,7 @@ using Here_To_Help.Repositories;
 
 namespace Here_To_Help.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 
@@ -44,7 +44,7 @@ namespace Here_To_Help.Controllers
             return Ok(_skillTagRepository.GetSkillTagsByPostId(id));
         }
 
-        [HttpPost]
+        [HttpPost("create/{id}")]
         public IActionResult Post(SkillTag SkillTag)
         {
             _skillTagRepository.Add(SkillTag);

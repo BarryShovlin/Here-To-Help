@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PostContext } from "../../providers/PostProvider";
+import { SkillTagContext } from "../../providers/SkillTagProvider"
 import { useParams, useHistory, Link } from "react-router-dom";
 import { Button, Row } from "reactstrap";
 import "./Posts.css"
@@ -7,6 +8,7 @@ import "./Posts.css"
 
 export const PostDetails = () => {
     const { posts, getPostById } = useContext(PostContext);
+    const { skillTags, getSkillTagsByPostId } = useContext(SkillTagContext);
 
 
     let { postId } = useParams()
@@ -18,7 +20,11 @@ export const PostDetails = () => {
             .then((res) => {
                 setPost(res)
             })
+        getSkillTagsByPostId(postId)
+
     }, []);
+
+    console.log(skillTags)
     const currentUser = JSON.parse(sessionStorage.getItem("userProfile"))
 
     const date = new Date(post.dateCreated).toLocaleString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' })
@@ -37,6 +43,11 @@ export const PostDetails = () => {
                     <p className="post-details">Published by {post.userProfile?.userName}</p>
                     <p className="postContent">{post.content}</p>
                     <a target="_blank" href={`${post.url}`}>Check Out The Link</a>
+                </div>
+                <div className="skillTags">
+                    {skillTags.map((tag) => {
+                        return <p>{tag.title}</p>
+                    })}
                 </div>
             </div>
             <Button color="secondary" size="sm" onClick={() => {
