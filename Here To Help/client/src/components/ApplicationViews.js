@@ -66,12 +66,12 @@ export default function ApplicationViews() {
                 </Route>
                 <UserProfileProvider>
                     <Route exact path="/userProfiles">
-                        <UserProfileList />
+                        {isLoggedIn ? <UserProfileList /> : <Redirect to="/login" />}
                     </Route>
                     <UserSkillProvider>
                         <QuestionProvider>
                             <Route exact path="/userProfile/detail/getById/:userProfileId(\d+)">
-                                <UserProfileDetails />
+                                {isLoggedIn ? <UserProfileDetails /> : <Redirect to="/login" />}
                             </Route>
                         </QuestionProvider>
                     </UserSkillProvider>
@@ -103,14 +103,14 @@ export default function ApplicationViews() {
                             </Route>
 
                             <Route exact path="/Post/GetById/:postId(\d+)">
-                                <PostDetails />
+                                {isLoggedIn ? <PostDetails /> : <Redirect to="/login" />}
                             </Route>
                             <Route exact path="/Post/:postId(\d+)">
                                 {isLoggedIn ? <EditPost /> : <Redirect to="/login" />}
                             </Route>
 
                             <Route exact path="/Posts/NewPost">
-                                <AddPostForm />
+                                {isLoggedIn ? <AddPostForm /> : <Redirect to="/login" />}
                             </Route>
                             <Route exact path="/post/delete/:postId(\d+)">
                                 {isLoggedIn ? <DeletePost /> : <Redirect to="/login" />}

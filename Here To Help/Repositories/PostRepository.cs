@@ -18,8 +18,9 @@ namespace Here_To_Help.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT p.id, p.Title, p.Url, p.Content, p.UserProfileId, p.SkillId, p.DateCreated, s.Id AS IdSkill, s.Name AS NameSkill, u.Id as IdUser, u.FirebaseUserId AS FireId, u.Name AS NameUser, u.Email AS EmailUser, u.UserName AS UserName, u.DateCreated AS UCreate
-                         FROM Post p Join Skill s ON p.SkillId = s.Id JOIN UserProfile u ON p.UserProfileId = u.Id";
+                       SELECT p.id, p.Title, p.Url, p.Content, p.UserProfileId, p.SkillId, p.DateCreated, p.DateDeleted, s.Id AS IdSkill, s.Name AS NameSkill, u.Id as IdUser, u.FirebaseUserId AS FireId, u.Name AS NameUser, u.Email AS EmailUser, u.UserName AS UserName, u.DateCreated AS UCreate
+                         FROM Post p Join Skill s ON p.SkillId = s.Id JOIN UserProfile u ON p.UserProfileId = u.Id
+                          WHERE p.DateDeleted IS NULL  ";
 
                     Post post = null;
                     var reader = cmd.ExecuteReader();
@@ -196,7 +197,7 @@ namespace Here_To_Help.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "UPDATE SET DateDeleted = @DateDeleted FROM Post WHERE Id = @Id";
+                    cmd.CommandText = "UPDATE Post SET DateDeleted = @DateDeleted FROM Post WHERE Id = @Id";
                     DbUtils.AddParameter(cmd, "@id", PostId);
                     DbUtils.AddParameter(cmd, "@DateDeleted", DateTime.Now);
                     cmd.ExecuteNonQuery();

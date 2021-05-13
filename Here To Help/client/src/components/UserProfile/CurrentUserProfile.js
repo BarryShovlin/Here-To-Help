@@ -4,7 +4,7 @@ import { UserProfileContext } from "../../providers/UserProfileProvider"
 import { UserSkillContext } from "../../providers/UserSkillProvider"
 import { SkillContext } from "../../providers/SkillProvider"
 import { UserSkill } from "../UserSkill/UserSkill"
-import { Button, Col } from "reactstrap"
+import { Button, Col, Card } from "reactstrap"
 import { PostContext } from "../../providers/PostProvider"
 import { Post } from "../Post/Post"
 
@@ -58,22 +58,24 @@ export const CurrentUserProfileDetails = () => {
             <Button className="AskQuestion" color="primary" size="sm" outline color="secondary">
                 <Link to={"/Question/new"} style={{ color: `#000` }}>Ask a New Question</Link>
             </Button>
-            <article className="UserSkills">
-                <h3 className="UserSkillsHeader">Your Current Skills</h3>
-                <div className="AddSkill">
-                    <Button className="AddSkillButton" color="primary" size="sm" outline color="secondary">
-                        <Link className="addSkill" to={`/userSkill`} style={{ color: `#000` }} >
-                            Add a new Skill
+            <Card className="UserSkills">
+                <Col xs="auto">
+                    <h3 className="UserSkillsHeader">Your Current Skills</h3>
+                    <div className="AddSkill">
+                        <Button className="AddSkillButton" color="primary" size="sm" outline color="secondary">
+                            <Link className="addSkill" to={`/userSkill`} style={{ color: `#000` }} >
+                                Add a new Skill
                             </Link>
-                    </Button>
-                </div>
-                <div className="UserSkill_Cards">{CurrentUserSkills.map(s => {
-                    if (s.isKnown === true) {
-                        return UserSkill(s)
-                    }
-                })}</div>
+                        </Button>
+                    </div>
+                    <div className="UserSkill_Cards">{CurrentUserSkills.map(s => {
+                        if (s.isKnown === true) {
+                            return UserSkill(s)
+                        }
+                    })}</div>
+                </Col>
 
-            </article>
+            </Card>
             <article className="InterestedSkills">
                 <h3 className="InterestedSkillsHeader">Your Interests</h3>
                 <div className="InterestedSkills_Cards">{CurrentUserSkills.map(s => {
