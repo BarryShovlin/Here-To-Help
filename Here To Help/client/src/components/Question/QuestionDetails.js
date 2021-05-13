@@ -36,8 +36,8 @@ export const QuestionDetails = () => {
                     <Button className="viewComments">
                         <Link to={`/QuestionComment/GetByQuestionId/${question.id}`}>View Comments</Link>
                     </Button>
-                    <Button className="deleteComment">
-                        <Link to={`/QuestionComment/delete/${question.id}`}>DeleteComment</Link>
+                    <Button className="AddComment">
+                        <Link to={`/QuestionComment/create/${question.id}`}>Add Comment</Link>
                     </Button>
                 </div>
             </div>
