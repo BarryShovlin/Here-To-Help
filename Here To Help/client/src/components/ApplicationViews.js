@@ -78,101 +78,102 @@ export default function ApplicationViews() {
                     </UserSkillProvider>
                 </UserProfileProvider>
 
+
+                <SkillProvider>
+                    <UserSkillProvider>
+                        <Route exact path="/UserSkill">
+                            <AddUserSkillForm />
+                        </Route>
+                        <Route exact path="/userSkill/delete/:userSkillId(\d+)">
+                            {isLoggedIn ? <DeleteUserSkill /> : <Redirect to="/login" />}
+                        </Route>
+                        <Route exact path="/Skill">
+                            {isLoggedIn ? <UserSkillSelect /> : <Redirect to="/login" />}
+                        </Route>
+                    </UserSkillProvider>
+                </SkillProvider>
+
+                <PostProvider>
+                    <SkillProvider>
+                        <SkillTagProvider>
+                            <PostCommentProvider>
+
+                                <Route exact path="/Post">
+                                    {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
+                                </Route>
+
+                                <Route exact path="/Post/GetById/:postId(\d+)">
+                                    <PostDetails />
+                                </Route>
+                                <Route exact path="/Post/:postId(\d+)">
+                                    {isLoggedIn ? <EditPost /> : <Redirect to="/login" />}
+                                </Route>
+
+                                <Route exact path="/Posts/NewPost">
+                                    <AddPostForm />
+                                </Route>
+                                <Route exact path="/post/delete/:postId(\d+)">
+                                    {isLoggedIn ? <DeletePost /> : <Redirect to="/login" />}
+                                </Route>
+                                <Route exact path="/PostComment/getByPostId/:postId(\d+)">
+                                    {isLoggedIn ? <PostCommentList /> : <Redirect to="/login" />}
+                                </Route>
+                                <Route exact path="/PostComment/create/:postId(\d+)">
+                                    {isLoggedIn ? <PostCommentForm /> : <Redirect to="/login" />}
+                                </Route>
+                                <Route exact path="/PostComment/delete/:postCommentId(\d+)">
+                                    {isLoggedIn ? <PostCommentDeleteForm /> : <Redirect to="/login" />}
+                                </Route>
+                                <Route exact path="/SkillTag/create/:postId(\d+)">
+                                    {isLoggedIn ? <SkillTagForm /> : <Redirect to="/login" />}
+                                </Route>
+                                <Route exact path="/SkillTag/delete/:skillTagId(\d+)">
+                                    {isLoggedIn ? <SkillTagDeleteForm /> : <Redirect to="/login" />}
+                                </Route>
+                                <Route exact path="/Post/search?q=:criterion">
+                                    {isLoggedIn ? <SearchPostList /> : <Redirect to="/login" />}
+                                </Route>
+                            </PostCommentProvider>
+                        </SkillTagProvider>
+                    </SkillProvider>
+                </PostProvider>
+
+
+                <QuestionProvider>
+                    <SkillProvider>
+                        <QuestionCommentProvider>
+                            <Route exact path="/Question">
+                                {isLoggedIn ? <QuestionList /> : <Redirect to="/login" />}
+                            </Route>
+                            <Route exact path="/Question/getById/:questionId(\d+)">
+                                {isLoggedIn ? <QuestionDetails /> : <Redirect to="login" />}
+                            </Route>
+                            <Route exact path="/Question/getByUserId/:questionId(\d+)">
+                                {isLoggedIn ? <UserQuestionList /> : <Redirect to="/login" />}
+                            </Route>
+                            <Route exact path="/Question/:questionId(\d+)">
+                                {isLoggedIn ? <EditQuestion /> : <Redirect to="/login" />}
+                            </Route>
+                            <Route exact path="/Question/delete/:questionId(\d+)">
+                                {isLoggedIn ? <DeleteQuestion /> : <Redirect to="/login" />}
+                            </Route>
+                            <Route exact path="/Question/new">
+                                {isLoggedIn ? <AddQuestionForm /> : <Redirect to="/" />}
+                            </Route>
+                            <Route exact path="/QuestionComment/getByQuestionId/:questionId(\d+)">
+                                {isLoggedIn ? <QuestionCommentList /> : <Redirect to="/login" />}
+                            </Route>
+                            <Route exact path="/QuestionComment/create/:questionId(\d+)">
+                                {isLoggedIn ? <QuestionCommentForm /> : <Redirect to="/login" />}
+                            </Route>
+                            <Route exact path="/QuestionComment/delete/:questionCommentId(\d+)">
+                                {isLoggedIn ? <QuestionCommentDeleteForm /> : <Redirect to="/login" />}
+                            </Route>
+                        </QuestionCommentProvider>
+                    </SkillProvider>
+                </QuestionProvider>
+
             </Switch>
-
-            <SkillProvider>
-                <UserSkillProvider>
-                    <Route exact path="/UserSkill">
-                        <AddUserSkillForm />
-                    </Route>
-                    <Route exact path="/userSkill/delete/:userSkillId(\d+)">
-                        {isLoggedIn ? <DeleteUserSkill /> : <Redirect to="/login" />}
-                    </Route>
-                    <Route exact path="/Skill">
-                        {isLoggedIn ? <UserSkillSelect /> : <Redirect to="/login" />}
-                    </Route>
-                </UserSkillProvider>
-            </SkillProvider>
-
-            <PostProvider>
-                <SkillProvider>
-                    <SkillTagProvider>
-                        <PostCommentProvider>
-
-                            <Route exact path="/Post">
-                                {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
-                            </Route>
-
-                            <Route exact path="/Post/GetById/:postId(\d+)">
-                                <PostDetails />
-                            </Route>
-                            <Route exact path="/Post/:postId(\d+)">
-                                {isLoggedIn ? <EditPost /> : <Redirect to="/login" />}
-                            </Route>
-
-                            <Route exact path="/Posts/NewPost">
-                                <AddPostForm />
-                            </Route>
-                            <Route exact path="/post/delete/:postId(\d+)">
-                                {isLoggedIn ? <DeletePost /> : <Redirect to="/login" />}
-                            </Route>
-                            <Route exact path="/PostComment/getByPostId/:postId(\d+)">
-                                {isLoggedIn ? <PostCommentList /> : <Redirect to="/login" />}
-                            </Route>
-                            <Route exact path="/PostComment/create/:postId(\d+)">
-                                {isLoggedIn ? <PostCommentForm /> : <Redirect to="/login" />}
-                            </Route>
-                            <Route exact path="/PostComment/delete/:postCommentId(\d+)">
-                                {isLoggedIn ? <PostCommentDeleteForm /> : <Redirect to="/login" />}
-                            </Route>
-                            <Route exact path="/SkillTag/create/:postId(\d+)">
-                                {isLoggedIn ? <SkillTagForm /> : <Redirect to="/login" />}
-                            </Route>
-                            <Route exact path="/SkillTag/delete/:skillTagId(\d+)">
-                                {isLoggedIn ? <SkillTagDeleteForm /> : <Redirect to="/login" />}
-                            </Route>
-                            <Route exact path="/Post/search?q=:criterion(\d+)&sortDesc=false">
-                                {isLoggedIn ? <SearchPostList /> : <Redirect to="/login" />}
-                            </Route>
-                        </PostCommentProvider>
-                    </SkillTagProvider>
-                </SkillProvider>
-            </PostProvider>
-
-
-            <QuestionProvider>
-                <SkillProvider>
-                    <QuestionCommentProvider>
-                        <Route exact path="/Question">
-                            {isLoggedIn ? <QuestionList /> : <Redirect to="/login" />}
-                        </Route>
-                        <Route exact path="/Question/getById/:questionId(\d+)">
-                            {isLoggedIn ? <QuestionDetails /> : <Redirect to="login" />}
-                        </Route>
-                        <Route exact path="/Question/getByUserId/:questionId(\d+)">
-                            {isLoggedIn ? <UserQuestionList /> : <Redirect to="/login" />}
-                        </Route>
-                        <Route exact path="/Question/:questionId(\d+)">
-                            {isLoggedIn ? <EditQuestion /> : <Redirect to="/login" />}
-                        </Route>
-                        <Route exact path="/Question/delete/:questionId(\d+)">
-                            {isLoggedIn ? <DeleteQuestion /> : <Redirect to="/login" />}
-                        </Route>
-                        <Route exact path="/Question/new">
-                            {isLoggedIn ? <AddQuestionForm /> : <Redirect to="/" />}
-                        </Route>
-                        <Route exact path="/QuestionComment/getByQuestionId/:questionId(\d+)">
-                            {isLoggedIn ? <QuestionCommentList /> : <Redirect to="/login" />}
-                        </Route>
-                        <Route exact path="/QuestionComment/create/:questionId(\d+)">
-                            {isLoggedIn ? <QuestionCommentForm /> : <Redirect to="/login" />}
-                        </Route>
-                        <Route exact path="/QuestionComment/delete/:questionCommentId(\d+)">
-                            {isLoggedIn ? <QuestionCommentDeleteForm /> : <Redirect to="/login" />}
-                        </Route>
-                    </QuestionCommentProvider>
-                </SkillProvider>
-            </QuestionProvider>
 
         </main>
     )

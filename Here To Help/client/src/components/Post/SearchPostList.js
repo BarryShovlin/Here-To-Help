@@ -13,7 +13,7 @@ export const SearchPostList = () => {
     useEffect(() => {
         searchPost(criterion)
             .then(console.log(criterion))
-    }, [criterion]);
+    }, []);
 
 
     return (
