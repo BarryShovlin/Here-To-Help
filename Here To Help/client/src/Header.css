@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Poppins:wght@400;600;700&display=swap');
+
+
+
+
+nav-bar-link-container {
+    background-color: #ebe6d9 !important;
+    font-family: 'Poppins', sans-serif !important;
+    color: #1d3c35;
+}
+
+.navbar-light {
+    font-family: 'Poppins', sans-serif !important;
+    color: #1d3c35 !important;
+    font-weight: 800;
+}
+
+.nav-link {
+    font-family: 'Poppins', sans-serif !important;
+    color: #1d3c35 !important;
+}
+
+

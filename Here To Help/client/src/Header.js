@@ -10,6 +10,7 @@ import {
     NavLink
 } from 'reactstrap';
 import { UserProfileContext } from "./providers/UserProfileProvider";
+import "./Header.css"
 
 export default function Header() {
     const { isLoggedIn, logout } = useContext(UserProfileContext);
@@ -18,8 +19,7 @@ export default function Header() {
 
     return (
         <div>
-            <Navbar className="nav-bar-link-container" color="light" light expand="md">
-                <NavbarBrand tag={RRNavLink} to="/">Here To Help</NavbarBrand>
+            <Navbar className="nav-bar-link-container" light expand="md">
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>

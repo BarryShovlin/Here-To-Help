@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Poppins:wght@400;600;700&display=swap');
+
 
 main {
   margin: 2em;
@@ -21,12 +21,13 @@ p {
 }
 
 body {
-  background-color: #F9F5ED;
-  font-family: 'Karla', sans-serif;
+  background-color: #F9F5ED !important;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 h1 {
-  font-family: 'Crimson Text', serif;
+  font-family: 'Poppins', sans-serif;
+
 }
 
 button {
