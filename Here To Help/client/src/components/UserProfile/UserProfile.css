@@ -17,9 +17,9 @@
 }
 
 
-.posts-title {
+.curUseProf {
     text-transform: capitalize;
-    color: #000;
+    background-color: #f9f5ed;
 }
 
 .posts-header {

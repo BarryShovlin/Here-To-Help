@@ -7,6 +7,7 @@ import { UserSkill } from "../UserSkill/UserSkill"
 import { Button, Col, Card } from "reactstrap"
 import { PostContext } from "../../providers/PostProvider"
 import { Post } from "../Post/Post"
+import "./UserProfile.css"
 
 export const CurrentUserProfileDetails = () => {
 
@@ -45,7 +46,7 @@ export const CurrentUserProfileDetails = () => {
 
     return (
 
-        <article>
+        <article className="curUseProf">
             <section className="userProfile">
                 <h3 className="userProfile__displayName">{userProfile.userName}</h3>
                 <div className="userProfile__fullName">Name: {userProfile.name}</div>

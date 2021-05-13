@@ -6,7 +6,7 @@ using Here_To_Help.Repositories;
 
 namespace Here_To_Help.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
 
