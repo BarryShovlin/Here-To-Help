@@ -22,8 +22,9 @@
     color: #000;
 }
 
-.posts-header {
-    margin-bottom: 1em;
+#button {
+    background-color: #ebe6d9 !important;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 .post-card {

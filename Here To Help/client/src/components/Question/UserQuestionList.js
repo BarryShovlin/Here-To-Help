@@ -21,7 +21,7 @@ export const UserQuestionList = () => {
         <div className="posts-container">
             <Col className="posts-header">
                 <h1>My Project Questions</h1>
-                <Button className="AskQuestion" color="primary" size="sm" outline color="secondary">
+                <Button id="button" className="AskQuestion" color="primary" size="sm" outline color="secondary">
                     <Link to={"/Question/new"} style={{ color: `#000` }}>Ask a New Question</Link>
                 </Button>
             </Col>
@@ -38,10 +38,10 @@ export const UserQuestionList = () => {
                             <p className="posts--category">Project Type: {que.skill.name}</p>
                             <p className="posts--date">Date Posted: {que.dateCreated}</p>
                             <p className="posts--author">Added by: {que.userProfile.userName}</p>
-                            <Button className="QuestionEditBtn" size="sm" outline color="secondary">
+                            <Button id="button" className="QuestionEditBtn" size="sm" outline color="secondary">
                                 <Link to={`/Question/${que.id}`} style={{ color: `#000` }}>Edit Your Question</Link>
                             </Button>
-                            <Button className="QuestionDeleteBtn" size="sm" outline color="secondary">
+                            <Button id="button" className="QuestionDeleteBtn" size="sm" outline color="secondary">
                                 <Link to={`/Question/delete/${que.id}`} style={{ color: `#000` }}> Remove This Question</Link>
                             </Button>
                         </div>

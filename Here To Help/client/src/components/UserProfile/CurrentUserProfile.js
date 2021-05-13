@@ -53,17 +53,17 @@ export const CurrentUserProfileDetails = () => {
                 <div className="userProfile__email">Email: {userProfile.email}</div>
                 <div className="userProfile__creationDate">Member Since: {date}</div>
             </section>
-            <Button className="UserQuestions" color="primary" size="sm" outline color="secondary">
+            <Button id="button" className="UserQuestions" size="sm" outline color="secondary">
                 <Link to={`/Question/getByUserId/${userProfileId.id}`} style={{ color: `#000` }}>My Project Questions</Link>
             </Button>
-            <Button className="AskQuestion" color="primary" size="sm" outline color="secondary">
+            <Button id="button" className="AskQuestion" size="sm" outline color="secondary">
                 <Link to={"/Question/new"} style={{ color: `#000` }}>Ask a New Question</Link>
             </Button>
             <Card className="UserSkills">
                 <Col xs="auto">
                     <h3 className="UserSkillsHeader">Your Current Skills</h3>
                     <div className="AddSkill">
-                        <Button className="AddSkillButton" color="primary" size="sm" outline color="secondary">
+                        <Button id="button" className="AddSkillButton" color="primary" size="sm" outline color="secondary">
                             <Link className="addSkill" to={`/userSkill`} style={{ color: `#000` }} >
                                 Add a new Skill
                             </Link>

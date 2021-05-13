@@ -4,12 +4,12 @@
 
 
 nav-bar-link-container {
-    background-color: #ebe6d9 !important;
+    background-color: #ebe6d9!important;
     font-family: 'Poppins', sans-serif !important;
     color: #1d3c35;
 }
 
-.navbar-light {
+.navbar-light .navbar-brand {
     font-family: 'Poppins', sans-serif !important;
     color: #1d3c35 !important;
     font-weight: 800;
@@ -18,6 +18,11 @@ nav-bar-link-container {
 .nav-link {
     font-family: 'Poppins', sans-serif !important;
     color: #1d3c35 !important;
+}
+
+.navbar {
+    background-color: #ebe6d9!important;
+
 }
 
 
