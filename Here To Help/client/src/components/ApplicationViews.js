@@ -56,6 +56,9 @@ export default function ApplicationViews() {
                                         <PostCommentProvider>
                                             <SkillTagProvider>
 
+                                                <Route path="/" exact>
+                                                    {isLoggedIn ? <CurrentUserProfileDetails /> : <Redirect to="/login" />}
+                                                </Route>
 
                                                 <Route path="/login">
                                                     <Login />
@@ -65,9 +68,7 @@ export default function ApplicationViews() {
                                                     <Register />
                                                 </Route>
 
-                                                <Route path="/" exact>
-                                                    {isLoggedIn ? <CurrentUserProfileDetails /> : <Redirect to="/login" />}
-                                                </Route>
+
 
 
                                                 <Route exact path="/userProfiles">

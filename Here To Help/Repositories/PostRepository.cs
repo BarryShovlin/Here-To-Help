@@ -230,7 +230,7 @@ namespace Here_To_Help.Repositories
             }
         }
 
-        public List<Post> Search(string criterion, bool sortDescending)
+        public List<Post> Search(string criterion)
         {
             using (var conn = Connection)
             {
@@ -247,14 +247,6 @@ namespace Here_To_Help.Repositories
                        
                     WHERE p.Title LIKE @Criterion OR p.Content LIKE @Criterion OR st.Title LIKE @Criterion";
 
-                    if (sortDescending)
-                    {
-                        sql += " ORDER BY p.DateCreated DESC";
-                    }
-                    else
-                    {
-                        sql += " ORDER BY p.DateCreated";
-                    }
 
                     cmd.CommandText = sql;
                     DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");

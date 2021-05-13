@@ -110,11 +110,18 @@ export const PostProvider = (props) => {
                 .then(getPostById(post.id)))
 
     const searchPost = (criterion) => {
-        return fetch(`https://localhost:5001/api/Post/search?q=${criterion}&sortDesc=false`)
-            .then((res) => res.json())
-            .then(setPosts)
-            .then(console.log(posts))
+        return getToken().then((token) =>
+            fetch(`/api/Post/search?q=${criterion}`, {
+                method: "GET",
+                headers: {
+                    Athorization: `Bearer ${token}`
+                }
+            })
+                .then((res) => res.json())
+                .then(setPosts)
+        )
     }
+
 
     return (
         <PostContext.Provider value={{ posts, getPosts, getUserPosts, getPostDetails, getPostById, getPostsByUserSkill, addPost, editPost, deletePost, searchPost }}>

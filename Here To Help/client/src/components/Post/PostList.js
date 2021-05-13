@@ -16,6 +16,7 @@ export const PostList = () => {
     return (
         <section>
             <SearchPosts />
+
             <div className="posts-container">
                 <Col className="posts-header">
                     <h1>All Posts</h1>
