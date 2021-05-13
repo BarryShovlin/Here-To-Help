@@ -7,15 +7,16 @@ import { Button } from "reactstrap"
 
 export const SkillTagForm = () => {
     const history = useHistory();
-    const { addSkillTag, skillTags } = useContext(SkillTagContext)
+    const { addSkillTag, skillTags, getAllSkillTags } = useContext(SkillTagContext)
     const { getPostById, posts } = useContext(PostContext)
     const { postId } = useParams(); //this  HAS TO MATCH this part ":postId(\d+)" in ApplicationViews
 
     const [post, setPosts] = useState({})
+
     useEffect(() => {
         getPostById(postId)
             .then(res => setPosts(res))
-    })
+    }, []);
 
     const userId = JSON.parse(sessionStorage.getItem("userProfile"))
     const [skillTag, setSkillTag] = useState({
@@ -23,7 +24,7 @@ export const SkillTagForm = () => {
         postId: 0,
         skillId: 0
 
-    }, []);
+    });
 
     const handleControlledInputChange = (event) => {
         const newSkillTag = { ...skillTag } // make a copy of state
@@ -34,13 +35,15 @@ export const SkillTagForm = () => {
 
 
 
-    const handleClickSaveComment = () => {
+    const handleClickSaveTag = () => {
         addSkillTag({
             title: skillTag.title,
             postId: post.id,
             skillid: post.skillId
         })
-            .then(getPostById(postId))
+            .then(getAllSkillTags())
+            .then(getPostById(post.id))
+            .then(history.push(`/Post/GetById/${post.id}`))
     }
 
 
@@ -48,7 +51,7 @@ export const SkillTagForm = () => {
 
     return (
         <div className="CommentForm">
-            <h2 className="CommentForm__title">New SkilTag</h2>
+            <h2 className="CommentForm__title">New SkillTag</h2>
             <fieldset>
             </fieldset>
             <fieldset>
@@ -64,8 +67,7 @@ export const SkillTagForm = () => {
 
 
             <Button className="btn btn-primary"
-                onClick={handleClickSaveComment}>
-                <Link to={`/Post/getById/${postId}`}>Add SkillTag</Link>
+                onClick={handleClickSaveTag}>
             </Button>
         </div>
     )

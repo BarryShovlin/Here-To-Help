@@ -62,7 +62,7 @@ export const EditPost = () => {
                 <div className="form-group">
                     <label htmlFor="skillId">Skill: </label>
                     <select name="skillId" id="skillId" className="form-control" onChange={handleControlledInputChange}>
-                        <option value="0">Select a Skill</option>
+                        <option value={post.Skill?.id}>{post.skill?.name}</option>
                         {skills.map(s => (
                             <option key={s.id} value={s.id}>
                                 {s.name}

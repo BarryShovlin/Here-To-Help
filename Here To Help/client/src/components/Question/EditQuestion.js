@@ -17,6 +17,7 @@ export const EditQuestion = () => {
         getQuestionById(questionId)
             .then((res) => setQuestion(res))
             .then(getAllSkills)
+            .then(console.log(question))
     }, [])
 
     const currentUser = JSON.parse(sessionStorage.getItem("userProfile"))
@@ -54,7 +55,7 @@ export const EditQuestion = () => {
                 <div className="form-group">
                     <label htmlFor="skillId">Skill: </label>
                     <select name="skillId" id="skillId" className="form-control" onChange={handleControlledInputChange}>
-                        <option value="0">Select a skill</option>
+                        <option value={question.skill?.id}>{question.skill?.name}</option>
                         {skills.map(s => (
                             <option key={s.id} value={s.id}>
                                 {s.name}
