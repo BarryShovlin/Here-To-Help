@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useHistory } from "react-router-dom"
 import { Button } from "reactstrap";
 import { PostContext } from "../../providers/PostProvider"
 import { SkillContext } from "../../providers/SkillProvider"
@@ -11,6 +11,7 @@ export const EditPost = () => {
     const { postId } = useParams();
 
     const [post, setPost] = useState({});
+    const history = useHistory()
 
     useEffect(() => {
         getPostById(postId)
@@ -26,7 +27,7 @@ export const EditPost = () => {
         const freshPost = { ...post };
 
         freshPost[event.target.id] = event.target.value
-        setPost(freshPost);
+        setPost(freshPost)
     }
 
 
@@ -40,6 +41,7 @@ export const EditPost = () => {
             skillId: post.skillId
         })
             .then(getPostById(post.id))
+            .then(history.push(`/Post/getById/${post.id}`))
     };
 
     return (
@@ -72,9 +74,7 @@ export const EditPost = () => {
                 </div>
             </fieldset>
             <Button color="primary" onClick={handleSave}>
-                <Link className="savePost" to={`/Post/GetById/${post.id}`} style={{ color: `#FFF` }}>
-                    Save Post
-                </Link>
+                Save Post
             </Button>
             <Button color="primary">
                 <Link to={"/Post"} style={{ color: `#FFF` }}>Cancel</Link>

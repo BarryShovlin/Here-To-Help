@@ -35,7 +35,8 @@ export const UserQuestionList = () => {
                                     {que.title}
                                 </h3>
                             </Link>
-                            <p className="posts--category">{que.skill.name}</p>
+                            <p className="posts--category">Project Type: {que.skill.name}</p>
+                            <p className="posts--date">Date Posted: {que.dateCreated}</p>
                             <p className="posts--author">Added by: {que.userProfile.userName}</p>
                             <Button className="QuestionEditBtn" size="sm" outline color="secondary">
                                 <Link to={`/Question/${que.id}`} style={{ color: `#000` }}>Edit Your Question</Link>
