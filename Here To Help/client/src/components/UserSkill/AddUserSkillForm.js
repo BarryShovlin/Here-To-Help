@@ -60,7 +60,7 @@ export const AddUserSkillForm = () => {
                     </select>
                 </div>
             </fieldset>
-            <Button color="primary" onClick={handleSaveUserSkill}>
+            <Button size="sm" style={{ color: "#b7813e" }} onClick={handleSaveUserSkill}>
                 <Link className="saveUserSkill" to={"/"} style={{ color: `#FFF` }}>
                     Save This to your skillset
                 </Link>

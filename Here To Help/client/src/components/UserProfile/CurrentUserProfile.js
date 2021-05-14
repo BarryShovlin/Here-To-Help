@@ -4,7 +4,7 @@ import { UserProfileContext } from "../../providers/UserProfileProvider"
 import { UserSkillContext } from "../../providers/UserSkillProvider"
 import { SkillContext } from "../../providers/SkillProvider"
 import { UserSkill } from "../UserSkill/UserSkill"
-import { Button, Col, Card } from "reactstrap"
+import { Button, Col, Card, Table } from "reactstrap"
 import { PostContext } from "../../providers/PostProvider"
 import { Post } from "../Post/Post"
 import "./UserProfile.css"
@@ -48,35 +48,35 @@ export const CurrentUserProfileDetails = () => {
 
         <article className="curUseProf">
             <section className="userProfile">
-                <h3 className="userProfile__displayName">{userProfile.userName}</h3>
-                <div className="userProfile__fullName">Name: {userProfile.name}</div>
-                <div className="userProfile__email">Email: {userProfile.email}</div>
+                <h1 className="userProfile__displayName">{userProfile.userName}</h1>
+                {/* <div className="userProfile__fullName">Name: {userProfile.name}</div>
+                <div className="userProfile__email">Email: {userProfile.email}</div> */}
                 <div className="userProfile__creationDate">Member Since: {date}</div>
             </section>
-            <Button id="button" className="UserQuestions" size="sm" outline color="secondary">
-                <Link to={`/Question/getByUserId/${userProfileId.id}`} style={{ color: `#000` }}>My Project Questions</Link>
-            </Button>
-            <Button id="button" className="AskQuestion" size="sm" outline color="secondary">
-                <Link to={"/Question/new"} style={{ color: `#000` }}>Ask a New Question</Link>
-            </Button>
-            <Card className="UserSkills">
-                <Col xs="auto">
-                    <h3 className="UserSkillsHeader">Your Current Skills</h3>
-                    <div className="AddSkill">
-                        <Button id="button" className="AddSkillButton" color="primary" size="sm" outline color="secondary">
-                            <Link className="addSkill" to={`/userSkill`} style={{ color: `#000` }} >
-                                Add a new Skill
-                            </Link>
-                        </Button>
-                    </div>
-                    <div className="UserSkill_Cards">{CurrentUserSkills.map(s => {
-                        if (s.isKnown === true) {
-                            return UserSkill(s)
-                        }
-                    })}</div>
-                </Col>
+            <div className="btns">
+                <Button id="MyQbutton" className="UserQuestions" size="sm" >
+                    <Link to={`/Question/getByUserId/${userProfileId.id}`} style={{ color: `#f9f5ed` }}>^ Track Your Questions</Link>
+                </Button>
+                <Button id="Askbutton" className="AskQuestion" size="sm" >
+                    <Link to={"/Question/new"} style={{ color: `#f9f5ed`, fontWeight: 500 }}>? Ask A Question</Link>
+                </Button>
+            </div>
 
-            </Card>
+            <h3 className="UserSkillsHeader">Your Current Skills</h3>
+            <div className="AddSkill">
+                <Button id="Addbutton" className="AddSkillButton" size="sm" >
+                    <Link className="addSkill" to={`/userSkill`} style={{ color: `#f9f5ed` }} >
+                        + Add Skill
+                            </Link>
+                </Button>
+            </div>
+            <div className="UserSkill_Cards">{CurrentUserSkills.map(s => {
+                if (s.isKnown === true) {
+                    return UserSkill(s)
+                }
+            })}</div>
+
+
             <article className="InterestedSkills">
                 <h3 className="InterestedSkillsHeader">Your Interests</h3>
                 <div className="InterestedSkills_Cards">{CurrentUserSkills.map(s => {
@@ -85,9 +85,10 @@ export const CurrentUserProfileDetails = () => {
                     }
                 })}</div>
             </article>
-            <section className="NewPosts">
-                <h1 className="News_header">New Posts for {userProfileId.userName}</h1>
-                <Col>
+            <aside>
+                <section className="NewPosts">
+                    <h1 className="News_header">Community Posts</h1>
+
                     {posts.map((post) => (
                         <div className="post-card" key={post.id}>
                             <Link to={`/post/GetById/${post.id}`}>
@@ -99,8 +100,9 @@ export const CurrentUserProfileDetails = () => {
                             <p className="posts--author">Added by: {post.userProfile?.userName}</p>
                         </div>
                     ))}
-                </Col>
-            </section>
+
+                </section>
+            </aside>
         </article>
 
     )

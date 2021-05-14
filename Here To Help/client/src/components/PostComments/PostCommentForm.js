@@ -48,15 +48,15 @@ export const PostCommentForm = () => {
                     <input type="text" id="content" rows="15" onChange={handleControlledInputChange}
                         required autoFocus
                         className="form-control"
-                        placeholder="Content"
+                        placeholder="Type Here"
                         value={postComment.content} />
                 </div>
             </fieldset>
 
 
-            <Button className="btn btn-primary"
+            <Button className="btn btn-primary" size="sm" style={{ width: "200px" }}
                 onClick={handleClickSaveComment}>
-                <Link to={`/Post/getById/${postId}`}>Save This Comment</Link>
+                <Link to={`/Post/getById/${postId}`} style={{ color: `#f9f5ed`, fontWeight: 500 }}>Save This Comment</Link>
             </Button>
         </div>
     )

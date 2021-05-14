@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { QuestionCommentContext } from "../../providers/QuestionCommentProvider";
 import { useHistory, useParams, Link } from 'react-router-dom';
 import { Button } from "reactstrap"
+import "./QuestionComments.css"
 
 
 export const QuestionCommentForm = () => {
@@ -43,19 +44,19 @@ export const QuestionCommentForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="content">Content:</label>
+                    <label htmlFor="content">Comment:</label>
                     <input type="text" id="content" rows="15" onChange={handleControlledInputChange}
                         required autoFocus
                         className="form-control"
-                        placeholder="Content"
+                        placeholder="Type Here"
                         value={questionComment.content} />
                 </div>
             </fieldset>
 
 
-            <Button className="btn btn-primary"
+            <Button size="sm" style={{ width: "200px" }} className="btn btn-primary"
                 onClick={handleClickSaveComment}>
-                <Link to={`/Question/getById/${questionId}`}>Save This Comment</Link>
+                <Link to={`/Question/getById/${questionId}`} style={{ color: `#f9f5ed`, fontWeight: 500 }}>Save This Comment</Link>
             </Button>
         </div>
     )

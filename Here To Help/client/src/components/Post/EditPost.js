@@ -3,6 +3,7 @@ import { Link, useParams, useHistory } from "react-router-dom"
 import { Button } from "reactstrap";
 import { PostContext } from "../../providers/PostProvider"
 import { SkillContext } from "../../providers/SkillProvider"
+import "./Posts.css"
 
 export const EditPost = () => {
     const { editPost, getPostById, posts } = useContext(PostContext);
@@ -73,10 +74,10 @@ export const EditPost = () => {
                     </select>
                 </div>
             </fieldset>
-            <Button color="primary" onClick={handleSave}>
+            <Button size="sm" style={{ width: "200px" }} onClick={handleSave}>
                 Save Post
             </Button>
-            <Button color="primary">
+            <Button size="sm" style={{ width: "200px" }} >
                 <Link to={"/Post"} style={{ color: `#FFF` }}>Cancel</Link>
             </Button>
 

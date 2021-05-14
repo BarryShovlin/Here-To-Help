@@ -21,8 +21,8 @@ export const UserQuestionList = () => {
         <div className="posts-container">
             <Col className="posts-header">
                 <h1>My Project Questions</h1>
-                <Button id="button" className="AskQuestion" color="primary" size="sm" outline color="secondary">
-                    <Link to={"/Question/new"} style={{ color: `#000` }}>Ask a New Question</Link>
+                <Button id="button" className="AskQuestion" size="sm" style={{ color: "#b7813e" }}>
+                    <Link to={"/Question/new"} style={{ color: `#f9f5ed` }}>Ask a New Question</Link>
                 </Button>
             </Col>
             <hr></hr>
@@ -38,11 +38,11 @@ export const UserQuestionList = () => {
                             <p className="posts--category">Project Type: {que.skill.name}</p>
                             <p className="posts--date">Date Posted: {que.dateCreated}</p>
                             <p className="posts--author">Added by: {que.userProfile.userName}</p>
-                            <Button id="button" className="QuestionEditBtn" size="sm" outline color="secondary">
-                                <Link to={`/Question/${que.id}`} style={{ color: `#000` }}>Edit Your Question</Link>
+                            <Button id="button" className="QuestionEditBtn" size="sm" style={{ color: "#b7813e" }}>
+                                <Link to={`/Question/${que.id}`} style={{ color: `#f9f5ed` }}>Edit Your Question</Link>
                             </Button>
-                            <Button id="button" className="QuestionDeleteBtn" size="sm" outline color="secondary">
-                                <Link to={`/Question/delete/${que.id}`} style={{ color: `#000` }}> Remove This Question</Link>
+                            <Button id="button" className="QuestionDeleteBtn" size="sm" style={{ color: "#b7813e" }}>
+                                <Link to={`/Question/delete/${que.id}`} style={{ color: `#f9f5ed` }}> Remove This Question</Link>
                             </Button>
                         </div>
                     }

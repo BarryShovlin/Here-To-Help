@@ -10,13 +10,13 @@ export const UserProfile = ({ userProfile }) => {
     const history = useHistory();
 
     return (
-        <Card>
-            <section className="userProfile">
+        <Card style={{ width: 250 }}>
+            <section id="up_card" className="userProfile">
                 <h3 className="userProfileTitle">
                     {userProfile.userName}
                 </h3>
                 <div className="userProfile-realname">{userProfile.name}</div>
-                <Button onClick={() => {
+                <Button size="sm" className="view_btn" onClick={() => {
                     history.push(`/userProfile/detail/getById/${userProfile.id}`)
                 }} > View Profile
             </Button>

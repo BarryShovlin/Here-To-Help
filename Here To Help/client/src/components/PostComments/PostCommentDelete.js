@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PostCommentContext } from "../../providers/PostCommentProvider";
 import { useHistory, useParams, Link } from 'react-router-dom';
+import { Button } from "reactstrap"
 
 
 const PostCommentDeleteForm = () => {
@@ -30,12 +31,12 @@ const PostCommentDeleteForm = () => {
             <h1> Delete </h1>
             <h3>Are you sure you wish to delete this comment?</h3>
             <div>Content: {postComment.content}</div>
-            <button onClick={handleDelete}>
+            <Button size="sm" style={{ width: "200px" }} onClick={handleDelete}>
                 <Link to={`/PostComment/GetByPostId/${postComment.postId}`}>Delete</Link>
-            </button>
-            <button onClick={() => {
+            </Button>
+            <Button size="sm" style={{ width: "200px" }} onClick={() => {
                 history.push(`/PostComment/GetByPostId/${postComment.postId}`)
-            }}>Cancel</button>
+            }}>Cancel</Button>
         </>
     );
 };

@@ -7,7 +7,7 @@ import { Button } from "reactstrap"
 
 export const SkillTagForm = () => {
     const history = useHistory();
-    const { addSkillTag, skillTags, getAllSkillTags } = useContext(SkillTagContext)
+    const { addSkillTag, skillTags, getSkillTagsByPostId } = useContext(SkillTagContext)
     const { getPostById, posts } = useContext(PostContext)
     const { postId } = useParams(); //this  HAS TO MATCH this part ":postId(\d+)" in ApplicationViews
 
@@ -41,8 +41,7 @@ export const SkillTagForm = () => {
             postId: post.id,
             skillid: post.skillId
         })
-            .then(getAllSkillTags())
-            .then(getPostById(post.id))
+            .then(getSkillTagsByPostId(post.id))
             .then(history.push(`/Post/GetById/${post.id}`))
     }
 
@@ -67,7 +66,7 @@ export const SkillTagForm = () => {
 
 
             <Button className="btn btn-primary"
-                onClick={handleClickSaveTag}>
+                onClick={handleClickSaveTag}> Add Tag
             </Button>
         </div>
     )

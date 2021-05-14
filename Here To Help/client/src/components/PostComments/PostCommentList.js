@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PostCommentContext } from "../../providers/PostCommentProvider";
 import { useHistory, useParams } from 'react-router-dom';
+import { Button } from "reactstrap"
 
 
 export const PostCommentList = () => {
@@ -21,21 +22,23 @@ export const PostCommentList = () => {
         <>
             <div>
                 {postComments.map((comment) => (
-                    <div key={comment.id}>
+                    <div className="QueCard" key={comment.id}>
                         <div>Comment: {comment.content}</div>
                         <div>By: {comment.userProfile?.userName}</div>
                         <div>Date Created: {comment.dateCreated.toLocaleString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' })} </div>
-                        <button onClick={() => {
+                        <Button size="sm" style={{ width: "200px" }} onClick={() => {
                             history.push(`/PostComment/delete/${comment.id}`)
                         }}>Delete
-                        </button>
+                        </Button>
                     </div>
                 ))}
             </div>
-            <button onClick={() => {
-                history.push("/Post")
-            }}>Back to Posts
-            </button>
+            <div className="back-btn">
+                <Button className="back-btn" size="sm" style={{ width: "200px" }} onClick={() => {
+                    history.push("/Post")
+                }}>Back to Posts
+            </Button>
+            </div>
         </>
     );
 };

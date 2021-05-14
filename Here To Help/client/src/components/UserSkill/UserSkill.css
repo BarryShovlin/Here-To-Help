@@ -7,3 +7,27 @@ h3 {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
 }
+
+.btn-secondary {
+    font-family: 'Poppins', sans-serif;
+    background-color: #b7813e !important;
+    border-color: #f9f5ed;
+    color: #f9f5ed;
+    width: 300px;
+
+}
+ section {
+     padding-bottom: 40px;
+ }
+
+ h2 {
+     text-align: center;
+     align-content: center;
+ }
+ .form-group {
+    font-family: 'Poppins', sans-serif;
+    background-color: #b7813e !important;
+    border-color: #f9f5ed;
+    color: #f9f5ed;
+    width: 200px;
+ }

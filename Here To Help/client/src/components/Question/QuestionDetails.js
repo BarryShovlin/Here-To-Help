@@ -32,12 +32,12 @@ export const QuestionDetails = () => {
                     </h1>
                     <p className="post-details">Asked on: {question.dateCreated}</p>
                     <p className="post-details">Asked by: {question.userProfile?.userName}</p>
-                    <p className="postContent">{question.content}</p>
-                    <Button className="viewComments">
-                        <Link to={`/QuestionComment/GetByQuestionId/${question.id}`}>View Comments</Link>
+                    <p className="postContent">Content: {question.content}</p>
+                    <Button size="sm" className="viewComments">
+                        <Link to={`/QuestionComment/GetByQuestionId/${question.id}`} style={{ color: `#f9f5ed` }}>View Comments</Link>
                     </Button>
-                    <Button className="AddComment">
-                        <Link to={`/QuestionComment/create/${question.id}`}>Add Comment</Link>
+                    <Button size="sm" className="AddComment">
+                        <Link to={`/QuestionComment/create/${question.id}`} style={{ color: `#f9f5ed` }}>Add Comment</Link>
                     </Button>
                 </div>
             </div>

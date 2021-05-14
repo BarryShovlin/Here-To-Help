@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { QuestionCommentContext } from "../../providers/QuestionCommentProvider";
 import { useHistory, useParams } from 'react-router-dom';
+import "./QuestionComments.css"
+import { Button, Col, Card, Table } from "reactstrap"
 
 
 export const QuestionCommentList = () => {
@@ -21,22 +23,24 @@ export const QuestionCommentList = () => {
         <>
             <div>
                 {questionComments.map((comment) => (
-                    <div key={comment.id}>
-                        <div> Question Title: {comment.question?.title}</div>
-                        <div>Comment: {comment.content}</div>
+                    <div className="QueCard" key={comment.id}>
+                        <div>"{comment.content}"</div>
                         <div>By: {comment.userProfile?.userName}</div>
                         <div>Date Created: {comment.dateCreated.toLocaleString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' })} </div>
-                        <button onClick={() => {
+                        <Button size="sm" style={{ width: "100px" }} onClick={() => {
                             history.push(`/QuestionComment/delete/${comment.id}`)
                         }}>Delete
-                        </button>
+                        </Button>
                     </div>
                 ))}
+                <div className="back-btn">
+                    <Button size="sm" style={{ width: "200px" }} onClick={() => {
+                        history.push("/Question")
+                    }}>Back to Questions
+            </Button>
+                </div>
             </div>
-            <button onClick={() => {
-                history.push("/Question")
-            }}>Back to Questions
-            </button>
+
         </>
     );
 };

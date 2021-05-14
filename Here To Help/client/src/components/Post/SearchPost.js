@@ -22,9 +22,9 @@ export const SearchPosts = () => {
 
                 </div>
             </fieldset>
-            <Button className="save_post btn btn-primary" onClick={(event) => {
+            <Button size="sm" style={{ width: "100px" }} className="save_post btn btn-primary" onClick={(event) => {
                 event.preventDefault();
-            }}><Link to={`/Post/search?q=${post}`}>Search</Link>
+            }}><Link to={`/Post/search?q=${post}`} style={{ color: `#f9f5ed`, fontWeight: 500 }}>Search</Link>
             </Button>
 
         </section>

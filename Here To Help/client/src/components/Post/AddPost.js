@@ -76,7 +76,7 @@ export const AddPostForm = () => {
                     </select>
                 </div>
             </fieldset>
-            <Button color="primary" onClick={handleSavePost}>
+            <Button size="sm" style={{ width: "100px" }} onClick={handleSavePost}>
                 <Link className="savePost" to={"/Post"} style={{ color: `#FFF` }}>
                     Save Post
                 </Link>

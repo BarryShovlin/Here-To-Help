@@ -46,7 +46,7 @@ export const UserSkillSelect = () => {
 
     return (
         <section className="post_form">
-            <h2 className="post_form_header">What Are You Interested In Learning More About?</h2>
+            <h3 className="post_form_header">Add To Your Interests</h3>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="skillId">Skill: </label>
@@ -60,14 +60,14 @@ export const UserSkillSelect = () => {
                     </select>
                 </div>
             </fieldset>
-            <Button color="primary" onClick={handleSaveUserSkill}>
-                <Link className="saveUserSkill" to={"/"} style={{ color: `#FFF` }}>
-                    Save and return to your profile page
+            <Button size="sm" style={{ color: "#b7813e" }} onClick={handleSaveUserSkill}>
+                <Link className="saveUserSkill" to={"/"} style={{ color: `#f9f5ed`, fontWeight: 500 }}>
+                    Save
                 </Link>
             </Button>
-            <Button color="primary" onClick={handleSaveUserSkill}>
-                <Link className="saveUserSkill" to={"/Skill"} style={{ color: `#FFF` }}>
-                    Save and add another interest
+            <Button size="sm" style={{ color: "#b7813e" }} onClick={handleSaveUserSkill}>
+                <Link className="saveUserSkill" to={"/Skill"} style={{ color: `#f9f5ed`, fontWeight: 500 }}>
+                    Add Another
                 </Link>
             </Button>
 

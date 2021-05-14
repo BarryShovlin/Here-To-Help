@@ -1,25 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Poppins:wght@400;600;700&display=swap');
 
-.posts-container {
-    margin: 0 auto;
+.post--card {
+    font-family: 'Playfair', serif;
+    font-weight: 600;
+    margin: 0;
 }
 
 .userProfile {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 200;
-    text-transform: uppercase;
+    font-family: 'Playfair', serif;
+    font-weight: 350;
     margin: 0;
 }
 
 .posts--author {
-    font-family: 'Karla', sans-serif;
-    font-style: italic;
+    font-family: 'Playfair', serif;
+    font-weight: 600;
+    margin: 0;
 }
 
 
 .curUseProf {
-    text-transform: capitalize;
     background-color: #f9f5ed;
+    font-family: 'Poppins', sans-serif;
+    color: #53696b;
+    text-align: center;
 }
 
 .posts-header {
@@ -28,14 +32,18 @@
 
 .post-card {
     margin-top: 2em;
+    font-family: 'Playfair', serif;
+    font-weight: 600;
+    margin: 0;
 }
 
 .post-details-container {
     margin: 3em;
 }
 
-.post-details-buttons {
+.Addbutton {
     float: right;
+    background-color: #b7813e;
 }
 
 .UserSkills {
@@ -47,12 +55,64 @@
     font-style: italic;
 }
 h3 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Playfair', serif;
     font-weight: 400;
 
 }
 
-#button {
+.btn-secondary {
     font-family: 'Poppins', sans-serif;
-    color: #b7813e !important;
+    background-color: #b7813e !important;
+    border-color: #f9f5ed;
+    color: #f9f5ed;
+    width: 200px;
+
 }
+
+#up_card {
+    background-color: #ebe6d9;
+    text-align: center;
+}
+
+
+
+
+
+.AddSkillButton {
+    width: 120px !important;
+    height: 30px !important;
+}
+h1 {
+    color: #1d3c35 !important;
+    font-family: 'Playfair', serif !important;
+    font-weight: 350;
+}
+
+h3 {
+    color: #1d3c35 !important;
+}
+
+element.style {
+    color: #f9f5ed;
+}
+
+.userProfile {
+    padding-bottom: 25px;
+}
+
+.UserSkillsHeader {
+    padding-top: 30px;
+}
+
+.InterestedSkills {
+    padding: 40px
+}
+
+.view_btn {
+    font-family: 'Poppins', sans-serif;
+    background-color: #b7813e !important;
+    border-color: #f9f5ed !important;
+    color: #f9f5ed !important;
+    width: 120px !important;
+}
+

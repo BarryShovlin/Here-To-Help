@@ -20,7 +20,7 @@ export const PostDetails = () => {
             .then((res) => {
                 setPost(res)
             })
-        getSkillTagsByPostId(postId)
+        .then(getSkillTagsByPostId(postId))
 
     }, [])
 

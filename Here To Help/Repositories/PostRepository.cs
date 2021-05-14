@@ -72,7 +72,7 @@ namespace Here_To_Help.Repositories
                 {
                     cmd.CommandText = @"SELECT p.Id, p.Title, p.Url, p.Content, p.SkillId, p.UserProfileId, p.DateCreated, us.Id as USkillId, us.SkillId as UserSkillSkillId, us.UserProfileId as UPId, s.Id as IdSkill, s.[Name] as NameSkill, up.Id As UpId, up.UserName as UpUserName
         FROM Post p JOIN Skill s ON p.SkillId = s.Id JOIN UserSkill us ON s.Id = us.SkillId JOIN UserProfile up ON up.Id = us.UserProfileId
-                            WHERE us.IsKnown = 0 AND p.SkillId = us.SkillId AND us.UserProfileId = @Id
+                            WHERE us.IsKnown = 0 AND p.SkillId = us.SkillId AND us.UserProfileId = @Id AND p.DateDeleted IS NULL
                             ORDER BY p.DateCreated DESC";
 
                     DbUtils.AddParameter(cmd, "@Id", Id);

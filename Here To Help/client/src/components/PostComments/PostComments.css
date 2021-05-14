@@ -1,0 +1,29 @@
+
+
+.QueCard {
+    font-family: 'Playfair', serif;
+    font-weight: 300;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 40px;
+    border-color: #ebe6d9!important;
+}
+.back-btn {
+    text-align: center;
+
+}
+
+.form-group {
+    font-family: 'Playfair', serif;
+    font-weight: 300;
+    padding-bottom: 30px;
+}
+
+h2 {
+    text-align: center;
+    align-content: center;
+}
+
+#content {
+    padding-bottom: 30px;
+}

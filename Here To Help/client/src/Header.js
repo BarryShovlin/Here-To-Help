@@ -20,8 +20,7 @@ export default function Header() {
     return (
         <div>
             <Navbar className="nav-bar-link-container" light expand="md">
-                <NavbarBrand tag={RRNavLink} to="/">Here To Help</NavbarBrand>
-
+                <img src="/here-to-help-logo-small.png" class="d-inline-block align-top logo" padding-left="30" width="175" height="70" alt="H2H-logo"></img>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>

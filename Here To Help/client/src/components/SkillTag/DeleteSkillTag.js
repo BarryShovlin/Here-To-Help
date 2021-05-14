@@ -18,8 +18,10 @@ export const SkillTagDeleteForm = () => {
     }, []);
 
 
+
     const handleDelete = () => {
         deleteSkillTag(skillTagId)
+            .then(history.push(`/Post/GetById/${skillTag.postId}`))
     }
 
 
@@ -27,8 +29,7 @@ export const SkillTagDeleteForm = () => {
         <>
             <h1> Delete </h1>
             <h3>Delete {skillTag.title}?</h3>
-            <button onClick={handleDelete}>
-                <Link to={`/Post/GetById/${skillTag.postId}`}>Delete</Link>
+            <button onClick={handleDelete}>Delete
             </button>
             <button onClick={() => {
                 history.push(`/Post/GetById/${skillTag.postId}`)

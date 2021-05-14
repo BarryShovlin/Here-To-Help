@@ -33,8 +33,8 @@ export const DeletePost = () => {
     return (
         <section>
             <div className="delete_message"> Are you sure you want to delete {post.title}?</div>
-            <Button className="delete" onClick={handlePostDelete}>Delete</Button>
-            <Button className="cancel" onClick={handleCancel}>Cancel</Button>
+            <Button size="sm" style={{ width: "100px" }} className="delete" onClick={handlePostDelete}>Delete</Button>
+            <Button size="sm" style={{ width: "100px" }} className="cancel" onClick={handleCancel}>Cancel</Button>
 
         </section>
     )

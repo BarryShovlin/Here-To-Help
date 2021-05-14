@@ -23,7 +23,6 @@ export const DeleteUserSkill = () => {
     console.log(currentUser)
     const handleUserSkillDelete = () => {
         deleteUserSkill(userSkill.id)
-            .then(getAllUserSkills())
             .then(history.push("/"))
     }
 
@@ -35,9 +34,9 @@ export const DeleteUserSkill = () => {
 
     return (
         <section>
-            <div className="delete_message"> Are you sure you want to delete {userSkill.skill?.name} from your list?</div>
-            <Button className="delete" onClick={handleUserSkillDelete}>Delete</Button>
-            <Button className="cancel" onClick={handleCancel}>Cancel</Button>
+            <div className="delete_message"> Would you like to remove {userSkill.skill?.name} from your list?</div>
+            <Button size="sm" style={{ width: "100px" }} className="delete" onClick={handleUserSkillDelete}>Delete</Button>
+            <Button size="sm" style={{ width: "100px" }} className="cancel" onClick={handleCancel}>Cancel</Button>
 
         </section>
     )

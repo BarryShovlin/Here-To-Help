@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { QuestionCommentContext } from "../../providers/QuestionCommentProvider";
 import { useHistory, useParams, Link } from 'react-router-dom';
+import "./QuestionComments.css"
 
 
 export const QuestionCommentDeleteForm = () => {
