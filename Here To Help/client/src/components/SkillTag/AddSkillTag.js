@@ -41,7 +41,7 @@ export const SkillTagForm = () => {
             postId: post.id,
             skillid: post.skillId
         })
-            .then(getSkillTagsByPostId(post.id))
+            //.then(getSkillTagsByPostId(post.id))
             .then(history.push(`/Post/GetById/${post.id}`))
     }
 

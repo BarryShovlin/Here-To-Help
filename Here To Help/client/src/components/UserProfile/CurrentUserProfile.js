@@ -97,7 +97,7 @@ export const CurrentUserProfileDetails = () => {
                                 </h3>
                             </Link>
                             <p className="posts--category">{post.skill?.name}</p>
-                            <p className="posts--author">Added by: {post.userProfile?.userName}</p>
+                            <p className="posts--author"></p>
                         </div>
                     ))}
 

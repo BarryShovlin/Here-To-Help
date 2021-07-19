@@ -7,8 +7,8 @@ import "./Posts.css"
 
 
 export const PostDetails = () => {
-    const { posts, getPostById } = useContext(PostContext);
-    const { skillTags, getSkillTagsByPostId, getAllSkillTags } = useContext(SkillTagContext);
+    const { getPostById } = useContext(PostContext);
+    const { skillTags, getSkillTagsByPostId } = useContext(SkillTagContext);
 
 
     let { postId } = useParams()
@@ -20,7 +20,7 @@ export const PostDetails = () => {
             .then((res) => {
                 setPost(res)
             })
-        .then(getSkillTagsByPostId(postId))
+            .then(getSkillTagsByPostId(postId))
 
     }, [])
 
